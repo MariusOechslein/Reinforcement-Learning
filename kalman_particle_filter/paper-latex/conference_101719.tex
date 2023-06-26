@@ -30,10 +30,10 @@ The Kalman and the Particle filter are often used for estimating the real positi
 % TODO: Maybe also investigate how kalman filter is affected?
 In this paper we investigate how non-linearity, like the the impact of a thrown ball with a wall, can be modelled with the Kalman and Particle filter. \\
 While the Kalman filter by definition is only applicable for linear systems, the Particle filter can also be used for non-linear systems.
-Therefore it is interesting to explore how robust the Particle filter is to these kinds of non-linearities. \\
-To investigate the robustness of the Particle filter to non-linearities, the Particle filter is first implemented with the system dynamics of knowing about the wall in the state-transition. 
-Since the Particle filter is expected to model this problem well, the implementation of the Particle filter is then changed to not know about the wall.
-In this case it is interesting to see whether the Particle filter will still be able to estimate the position of the ball correctly. 
+Therefore it is interesting to explore how robust the Particle filter is for these kinds of non-linearities. \\
+To investigate the robustness of the Particle filter to non-linearities, the Particle filter is first implemented with low variance and many observations.
+This performance is then compared to an instance with a low amount of observations and an instance with high variance in the observations.
+Since a low amount of observations and high variance is known to have a negative effect on the performance of the particle filter, it will be interesting to see whether the particle model can still model the non-linearity.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -49,15 +49,12 @@ In a non-linear system like the ball hitting a wall, which changes the direction
 Although the Kalman filter tries to model the system dynamics as best as it can, it will not be able to model this non-linearity due to its basic assumptions. 
 The Particle filter on the other hand is able to model such non-linearities. 
 But it is interesting to investigate how robust the Particle filter is to such non-linearities like the ball changing its direction when hitting a wall. \\
-To investigate this robustness the Particle filter is first implemented to know about the wall in the state transition. 
-The Particle filter should be easily able to model this direction change since the estimated velocity of the ball can be changed in the state transition.
-Therefore the position of the ball in the next time step should be estimated correctly. \\
-But for the case where this impact with a wall is not implemented in the state transition, it is impossible for the Particle filter to assume the sudden change of direction which results in a bad estimation of the position of the ball one time step after the impact with the wall.
-In this particular case it is interesting to investigate the robustness of the Particle filter, i.e. how the framerate and noise of the observations have to be for the Particle filter to still be able to estimate the ball's position correctly.
-% TODO: It was decided on only studying the variance and the number of observations for the robustness, since the main point of interest was the direction change when the ball hit the wall.
-% Next to the variance and the number of observations, also the noise distribution and the starting assumed starting position has an effect on the robustness of the Particle.
-% Since the main interest of this paper is this, it was only decided to only test the Particle filter on different values for the variance and the number of observations.
-% The noise was always assumed normally distributed and the starting positions were set the real starting positions of the ball. 
+To investigate this robustness the amount of observations is decreased and the variance of the observations are increased. 
+The point of interest is if the Particle filter will still be able to model the non-linear direction change after the ball hits the wall. \\
+It was decided to only study the variance and the number of observations for the robustness, since the main point of interest was the direction change when the ball hit the wall.
+Next to the variance and the number of observations, also the noise distribution and the starting assumed starting position has an effect on the robustness of the Particle filter.
+Since the main interest of this paper is the impact with the wall, it was decided to only test the Particle filter on different values for the variance and the number of observations.
+The noise was always assumed normally distributed and the starting positions were set to the real starting positions of the ball. 
 
 % TODO: Irgendwo noch einen Absatz darüber, dass Particle filter das mit den drei Schritten ..., ... und ... rekursiv schafft, die Sachen zu modellen?
 
@@ -94,7 +91,6 @@ When hitting a wall, the only change in the physical motions is that the velocit
 So at a after a certain time step where the wall is, the velocity in x-direction has to be updated to this $x^{vel} = -x^{vel}$.
 The velocity in y-direction is unchanged with the assumption that there is no fraction when the ball hits the wall and that the wall is exactly vertical. 
 The equation for the x-position also remains unchanged.
-
 
 
 \section{Kalman and Particle filter}
@@ -220,7 +216,7 @@ Although Particle filter also has a problem estimating the positions when the ob
 
 1. We see that the kalman filter is not able to apply for this "non-linear" problem. Because Kalman filter expects linear relations. Maybe an advanced Kalman filter would be applicable. \\
 2. We see that Particle filter with knowledge of boundary can handle it quite nicely.  \\
-3. What we see for Particle filter without knowledge of boundary. \\
+3.  What we see for Particle filter without knowledge of boundary. \\
 
 \section{Conclusion}
 
