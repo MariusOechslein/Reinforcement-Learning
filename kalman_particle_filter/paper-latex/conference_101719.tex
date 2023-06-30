@@ -28,12 +28,13 @@
 
 \begin{abstract}
 
-The Kalman and Particle filters are popular methods for estimating positions based on noisy observations. 
-In this paper we study how the Kalman and Particle filters behave for the problem of a ball throw with a non-linear trajectory. 
-While the Kalman filter is not expected to be able to model non-linearity, the Particle filter is applicable for such problems. 
-First it is investigated how excactly the Kalman filter behaves at the point of non-linearity, i.e. when the ball hits the wall.
-Secondly the robustness of the Particle filter is tested as the non-linearity of the system increases.
-This is done by changing the number of observations and their variance as the non-linearity increases, i.e. more walls are added.
+The Kalman and Particle filters are widely used techniques for estimating positions based on noisy observations.
+In this study, we examine the behavior of these filters in the context of a ball throw with a nonlinear trajectory.
+While the Kalman filter is not expected to accurately model nonlinearity, the Particle filter is well-suited for such problems.
+
+Firstly, we investigate how the Kalman filter behaves precisely at the point of nonlinearity, which occurs when the ball hits the wall.
+Secondly, we test the robustness of the Particle filter as the nonlinearity of the system increases. 
+	This is accomplished by altering the number of observations and their variance as more walls are introduced, thereby increasing the level of nonlinearity.
 
 \end{abstract}
 
@@ -42,31 +43,27 @@ Particle Filter, Kalman Filter, Ball Throw, Non-linearity, Robustness
 \end{IEEEkeywords}
 
 \section{Introduction}
-The throw of a ball with noisy observations by a 2D camera can be modeled well by the Kalman and Particle filter. 
-Both the Kalman and the Particle filter are applicable for this problem due to the uncertainty in the noisy observations.
-The Kalman filter by definition is able to model linear systems with high accuracy and the advantage of computationally cheap calculations. 
-The Particle filter is also able to model such a problem by recursively estimating the most likely position of the ball over time.
+The trajectory of a ball captured by a 2D camera, which involves noisy observations, can be effectively modeled using the Kalman and Particle filters.
+Both filters are applicable in this scenario due to the inherent uncertainty associated with the noisy observations.
 
-To add non-linearity to this setup, walls are introduced, which change the direction of the ball on impact.
-The basic assumptions of the Kalman filter suggest that this can not be modeled well by the Kalman filter.
-Therefore it is interesting to examine how well the Kalman filter can still model such a non-linear system. 
+The Kalman filter is well-suited for accurately modeling linear systems and offers the advantage of computationally efficient calculations \cite{b6}.
+Conversely, the Particle filter is capable of modeling such a problem by iteratively estimating the ball's most probable position over time \cite{b3}.
 
-The Particle filter on the other hand is popular for use cases with non-linearity \cite{}. % TODO: Cite somewhere that says this.
-To investigate the robustness of the Particle filter for non-linear systems, two experiments are conducted.
-First the number of observations is decreased and secondly the variance of the observations are increased. 
-The point of interest is how the robustness of the Particle filter is affected by this.
+In order to introduce non-linearity into this setup, we incorporate walls that alter the ball's direction upon impact.
+However, the fundamental assumptions of the Kalman filter indicate that it may struggle to accurately model such non-linear systems.
+Therefore, it is interesting to investigate how the Kalman filter exactly behaves in such situations. 
 
-% TODO: Irgendwo noch einen Absatz darüber, dass Particle filter das mit den drei Schritten ..., ... und ... rekursiv schafft, die Sachen zu modellen?
+On the other hand, the Particle filter is widely used for scenarios involving non-linear systems \cite{b3}.
+To assess the robustness of the Particle filter in non-linear systems, we conduct two experiments.
+Firstly, we decrease the number of observations, and secondly, we increase the variance of the observations.
+The key focus is to determine the impact of these variations on the Particle filter's robustness.
 
-% TODO: Überprüfen, mache ich das?
-%1. Establishing the research topic \\
-%2. Establishing a niche \\
-%3. Occupying the niche \\
 
 \section{Physics of a ball throw}
-% TODO: Sollte ich hier über die Physics schreiben? Ich glaube, ich könnte schon, wenn ich möchte.
-The physics of throwing a ball have to be implemented in the state transition to be able to estimate the position of the ball in the next time step.  
-The x-position can be modelled like this:
+
+
+To accurately estimate the position of a thrown ball in the next time step, the physics of ball throwing must be incorporated into the state transition.
+The x-position can be modeled as follows:
 \begin{equation*}
     \begin{aligned}
     x_{t+1} = x_{t} + v_x * \Delta t,   \\
@@ -74,8 +71,10 @@ The x-position can be modelled like this:
     \end{aligned}
     \tag{1}
 \end{equation*}
-where the ${v_x}$ is the ball's constant velocity in x-direction and $x_t$ is the x-position of the ball at time step t. \\
-The position and velocity in y-direction on the other hand are a bit more complex to calculate since they are affected by gravity.
+Here, ${v_x}$ represents the ball's constant velocity in the x-direction, and $x_t$ denotes the x-position of the ball at time step t.
+
+On the other hand, determining the position and velocity in the y-direction is slightly more complex due to the influence of gravity. 
+The equation is given by:
 \begin{equation*}
     \begin{aligned}
     y_{t+1} = y_t + v_y \Delta t - 0.5 g \Delta t^2, \\
@@ -83,11 +82,12 @@ The position and velocity in y-direction on the other hand are a bit more comple
     \end{aligned}
     \tag{2}
 \end{equation*}
-with g being the gravity constant at $g = 9.81$. \\
-When hitting a wall, the only change in the physical motions is that the velocity in x-direction has to be negated.
-So at a after a certain time step where the wall is, the velocity in x-direction has to be updated to this $x^{vel} = -x^{vel}$.
-The velocity in y-direction is unchanged with the assumption that there is no fraction when the ball hits the wall and that the wall is exactly vertical. 
-The equation for the x-position also remains unchanged.
+In this equation, g represents the gravitational constant $g = 9.81$.
+
+When the ball hits a wall, the only change in the physical motion is that the velocity in the x-direction must be negated.
+Therefore, at the time step corresponding to the position of the wall, the x-velocity should be updated as follows: $x^{vel} = -x^{vel}$.
+The velocity in the y-direction remains unchanged, assuming that there is no fraction upon impact and that the wall is perfectly vertical.
+The equation for the x-position also remains unaffected.
 
 
 \section{Kalman and Particle filter}
@@ -97,7 +97,7 @@ For both the Kalman and Particle filter the hidden state is defined as follows:
 \begin{equation*}
 \textbf{q} = (x, y, v_x, v_y)   \tag{3}
 \end{equation*}
-Only the x and y-positions are incorporated in the observations, given by
+Only the x and y-positions are incorporated in the observations, given by:
 \begin{equation*}
     \begin{aligned}
     \textbf{o} = (x, y)
@@ -112,46 +112,37 @@ Both Kalman and Particle filters implement the following equation for the recurs
 \tag{5}
 \end{equation*}
 
-The Kalman filter does so by the Kalman gain algorithm \cite{b2}.
-One important property of the Kalman filter is its linearity assumption.
-Due to these assumptions non-linear systems cannot be modelled by the Kalman filter \cite{b2}. % TODO: Stimmt die Citation?
-The Particle filter on the other hand can handle non-linearities and can be implemented by the Condensation algorithm \cite{b3}. 
+The Kalman filter achieves this through the utilization of the Kalman gain algorithm \cite{b2}.
+A crucial characteristic of the Kalman filter is its assumption of linearity.
+Consequently, the Kalman filter is incapable of modeling non-linear systems \cite{b2}.
+On the contrary, the Particle filter is equipped to handle non-linearities and can be implemented using the Condensation algorithm \cite{b3}.
 
 
 \subsection{Experimental setup}
 
-The first experiment is about a ball throw where the ball hits a wall 50 meter away.
-This experiment is conducted to test how well the Kalman and the Particle filter are able to model this non-linearity. 
-The outcome of this experiment is expected to be: the Kalman filter not being able to model the non-linearity and the Particle filter being able to model it well.
-The point of interest here is specifically how the Kalman filter behaves at the time step where the ball hits the wall and shortly after.  
+The first experiment focuses on a ball throw scenario where the ball collides with a wall positioned 50 meters away.
+This experiment aims to assess the ability of the Kalman and Particle filters to model this non-linearity.
+The expected outcome is that the Kalman filter will struggle to capture the non-linearity, while the Particle filter is anticipated to handle it effectively.
+Of particular interest the behavior of the Kalman filter at the time step when the ball hits the wall and shortly thereafter.
 
-The second experiment is about the robustness of the Particle filter as the non-linearity of the system increases.
-To increase the non-linearity of the system, two further walls are added, where it is interesting to examine whether the Particle filter is able to model the non-linearity as it was for the experiment with only one wall. 
-After to seperate changes to the parameters of the systems are made: the number of observations are decreased and the variance of the noise observations are increased.
+The second experiment aims to evaluate the robustness of the Particle filter as the level of non-linearity in the system increases.
+To amplify the non-linearity, two additional walls are introduced.
+The objective is to investigate the Particle filter's robustness as the non-linearity increases.
+To test the robustness, two experiments with modified parameters are conducted: reducing the number of observations and increasing the variance of the noise in the observations.
 
-It was decided to only change the variance and the number of observations, since the main point of interest was how well the Particle filter was able to follow the trajectory of the ball with the ball hitting walls.
-Next to the variance and the number of observations, also the noise distribution and assumed starting position could be changed.
-These parameters are not changed since the variance the number of observations already give a good intuition of the robustness of the Particle filter and further experiments are therefore not necessary.
-All noise was assumed normally distributed and the starting positions were set to the real starting positions of the ball.
+The decision to solely modify the variance and number of observations was based on the primary focus of examining the Particle filter's ability to track the trajectory.
+While other parameters such as noise distribution and assumed starting position could have been altered, it would have been unnecessary since the variance and number of observations already provide valuable insights into the Particle filter's robustness.
+All noise was assumed to follow a normal distribution, and the starting positions were set to the actual starting positions of the ball.
 
-% TODO: Different Mathematical Notation ...
+% TODO:
 %\begin{figure}[h]
 %\centerline{\includegraphics[width=70mm]{figs/condensation-algorithm.png}}
 %\caption{Condensation Particle filter algorithm from \cite{b1}.}
 %\label{fig:condensation-algorithm}
 %\end{figure}
 
-% Structure:
-%0. Physics of ball. Also using it for the state transition model later. \\
-%1. Simple Math Notations used for Kalman filter \\
-%2. Simple Math Notations usef for Particle Filter \\
-%3. Somehow introducing the boundaries to Particle Filter math? \\
-
 
 \section{Results}
-
-% TODO:
-% TODO: For all: make sure if it is variance or Standard deviation!
 
 % Kalman filter with time_sim=5, time_step=0.1, variance=1
 % Particle filter 1 boundary normal: time=5, time_step=0.1, variance=1
@@ -164,7 +155,7 @@ All noise was assumed normally distributed and the starting positions were set t
 
 \subsection{Kalman and Particle Filter modelling non-linearities}
 
-First the results of the Kalman filter estimating the positions of the ball are shown.   
+First, the results of the Kalman filter's position estimation for the ball are presented.
 \begin{figure}
 	\centering
 	\includegraphics[width=70mm]{figs/kalman-filter.png}
@@ -172,15 +163,14 @@ First the results of the Kalman filter estimating the positions of the ball are 
 	\label{fig:kalman-filter}
 \end{figure}
 
-In fig. \ref{fig:kalman-filter} the Kalman filter is able to model the trajectory well until the point where the ball hits the wall. 
-At this point the estimaitons of the Kalman filter continue on the same trajectory. 
+In fig. \ref{fig:kalman-filter}, it is evident that the Kalman filter effectively models the trajectory of the ball until the point of impact with the wall.
+However, following the collision, the Kalman filter's estimations continue along the same trajectory.
 As the errors increase over each time step, the Kalman filter changes its direction slowly, but is never able to come close to the real positions again.
 
-The Particle filter on the other hand is able to model the non-linearity well, as shown in fig. \ref{fig:particle-filter-one-boundary}.
-It estimates the positions well before the ball hits the wall and it is able to follow the trajectory of the ball after.
+In contrast, the Particle filter demonstrates impressive performance in modeling the non-linearity, as illustrated in Figure \ref{fig:particle-filter-one-boundary}.
+It accurately estimates the ball's positions both before and after the wall collision, effectively tracking its trajectory.
 
-Note that for both experiments the variance of the observation noise and the number of observations are equal to be able to compare the performance of the two filters.  
-
+It is important to note that, in both experiments, the variance of the observation noise and the number of observations are kept the same to enable a comparison of the two filters.
 \begin{table}[htbp]
     \caption{Estimation errors for one boundary. Boundary 50 m away.}
     \begin{center}
@@ -197,16 +187,17 @@ Note that for both experiments the variance of the observation noise and the num
     \end{center}
 \end{table}
 
-The errors of estimation for the Kalman and Particle filter both increase as the ball hits the wall \ref{tab:comparing-kalman-particle}.
-But while the Particle filter is able to estimate with the same error, the Kalman filter's error increases drastically.
-Altough the Kalman filter is around 0.5 m more accurate than the Particle filter before the ball hits the wall, this difference is not significant since it could potentially be due to the uncertainty of the system.
+As the ball hits the wall, the estimation errors increase for both the Kalman and Particle filters, as shown in Table \ref{tab:comparing-kalman-particle}.
+However, the Particle filter maintains a consistent level of low error throughout, while the Kalman filter experiences a drastic increase in error after the ball hits the wall.
+Although the Kalman filter demonstrates slightly higher accuracy of approximately 0.5 meters compared to the Particle filter before the wall impact, this difference is not significant, as it may be due to the uncertainties of the system.
 
 
 \subsection{Robustness of the Particle filter with increasing non-linearity}
 
-In this section I focus on the robustness of the Particle filter as the non-linearity increases, i.e. two more walls are added.
-For both of the experiments, the Particle Filter is first tested on reasonable values for the variance of and the number of observations to have a baseline performance.
-Later the variance and the number of observations are changed in order to test the robustness of the Particle filter. 
+In this section, the focus is on examining the robustness of the Particle filter as the level of non-linearity increases by adding two more walls.
+
+To establish a baseline performance, the Particle filter is initially tested with reasonable values for the variance and number of observations.
+Subsequently, these parameters are adjusted to assess the filter's robustness.
 
 \begin{figure}
 	\centering
@@ -221,108 +212,110 @@ Later the variance and the number of observations are changed in order to test t
 	\label{fig:particle-filter-multiple-boundaries}
 \end{figure}
 
-Note that the variance has to be decreased and the number of observations have to be increased substantially when two more walls are added. 
-For one wall (fig. \ref{fig:particle-filter-one-boundary}) the variance of the noise is set to 1 and the number of observations are set to 50.
-For three walls (fig. \ref{fig:particle-filter-multiple-boundaries}) the variance had to be lowered to 0.025 and the number of observations had to be increased to 200 for the Particle filter to model the balls trajectory reasonably well. \\
-This already indicates that the Particle filter struggles to estimate the ball throw as the number of non-linearities increase. 
+It should be noted that as two more walls are introduced, the variance needs to be reduced significantly and the number of observations increased substantially.
+For the experiment with a single wall (fig. \ref{fig:particle-filter-one-boundary}), the noise variance is set to 1 and the number of observations is set to 50.
+However, for the scenario with three walls (fig. \ref{fig:particle-filter-multiple-boundaries}), the variance had to be lowered to 0.025, while the number of observations had to be increased to 200 to achieve a reasonably accurate modeling of the ball's trajectory.
+This indicates that the Particle filter becomes less robust in estimating the ball throw as the number of non-linearities increases.
 
-First the variance of the noise of the observations is increased from 0.025 to 1.
 \begin{figure}
 	\centering
 	\includegraphics[width=70mm]{figs/particle-filter-multiple-boundaries-higher-variance}
 	\caption{Particle filter with multiple boundaries and higher variance. From own calculations.}
 	\label{fig:particle-filter-multiple-boundaries-higher-variance}
 \end{figure}
-Note that this is the same variance that was used for the Particle filter with one boundary in fig. \ref{fig:particle-filter-one-boundary}.
-The estimation in fig. \ref{fig:particle-filter-multiple-boundaries-higher-variance} is noticably worse than for the experiment with only one wall, where the same variance for the noise was used.
-This indicates that the robustness of the Particle filter decreases as the non-linearity increases.
 
-Secondly the number of observations are decreased from 200 to 50.
-Also note here that this is the same number of observations as in fig. \ref{fig:particle-filter-one-boundary} for the Particle filter with one boundary.
+Initially, the variance of the observation noise is increased from 0.025 to 1.
+It is important to note that this is the same variance used in the experiment with a single boundary (fig. \ref{fig:particle-filter-one-boundary}).
+The estimation results presented in fig. \ref{fig:particle-filter-multiple-boundaries-higher-variance} show a noticeable degradation compared to the experiment with a single wall, despite using the same variance for the noise.
+This indicates a decrease in the robustness of the Particle filter as the level of non-linearity increases.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=70mm]{figs/particle-filter-multiple-boundaries-fewer-observations}
 	\caption{Particle filter with multiple boundaries and fewer observations. From own calculations.}
 	\label{fig:particle-filter-multiple-boundaries-fewer-observations}
 \end{figure}
-Descreasing the number of observations in fig. \ref{fig:particle-fitler-mulitiple-boundaries-fewer-observations} indicate the same resolution as the experiment of increasing the variance: that the robustness of the model decreases as the non-linearity increases.
 
-In conclusion, all of the experiments clearly indicate the the robustness of the Particle filter decreases as the non-linearity increases.
+Next, the number of observations is decreased from 200 to 50.
+Here again, it is worth mentioning that this corresponds to the same number of observations used in the experiment with a single boundary (fig. \ref{fig:particle-filter-one-boundary}).
+The results shown in fig. \ref{fig:particle-filter-multiple-boundaries-fewer-observations} when reducing the number of observations reveal a similar trend as increasing the variance: the robustness of the model decreases as the level of non-linearity increases.
+
+In conclusion, all the conducted experiments clearly demonstrate that the robustness of the Particle filter decreases as the non-linearity of the system increases.
 
 
 \section{Discussion}\label{sec:discussion}
 
 \subsection{Kalman and Particle Filter modelling non-linearities}
 
-As the basic assumption Kalman filters are linear, the Kalman filter is not able to model such non-linearity.
-The same result was observed in the experiments of this study.
-Non-linear filters, such as particle filters, unscented Kalman filters, extended Kalman filters, batch filters and exact recursive filters are proposed to handle the problems of the Kalman filter better \cite{b5}.
-In this paper I investigated the Particle filter, but the other non-linear filters were not tested. 
-For further research it would be interesting to see, whether these other non-linear filters would be able to model the system better.
-% TODO: Which of these methods is expected to produce the best results? And why -> cite! Maybe from \cite{b5}: https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=1499276&casa_token=hno_g-CsGRoAAAAA:K9RLLHpZgEu-M5qBBobkPgSm1iVZHqhvJ2asLFC4k7XYA2k0f7VckJ-l7IU_nmaZzNKombUiC6z3WA 
+Due to the fundamental assumption of linearity in Kalman filters, they are incapable of effectively modeling non-linearities.
+This limitation was also evident in the experiments conducted in this study.
+To address the challenges posed by non-linear systems, various alternative non-linear filters have been proposed in literature, including particle filters, unscented Kalman filters, extended Kalman filters, batch filters, and exact recursive filters \cite{b5}.
+
+While this paper specifically focused on investigating the Particle filter, the performance of other non-linear filters was not assessed.
+It would be of interest for future research to explore whether these alternative non-linear filters would be able to model the non-linearity better.
 
 \subsection{Robustness of the Particle filter with increasing non-linearity}
+The Particle filter demonstrated superior modeling of non-linearity compared to the Kalman filter.
+However, its robustness decreased as the level of non-linearity increased.
+To maintain accurate modeling in the face of increased non-linearity, the Particle filter required more observations and reduced variance in the noise of the observations.
 
-The Particle filter was able to model the non-linearity better than the Kalman filter, but as the non-linearity increased, the Particle filter became less robust.  
-More observations and less variance in the noise of the observations was required for the Particle filter to still be able to model the system as the non-linearity increased.
+The findings of this study could be attributed to well-known challenges associated with Particle filters, which could impact their estimation performance.
+These challenges include the Degeneracy Problem, Sample Impoverishment, Particle Filter Divergence, and the selection of the Importance Density \cite{b4}.
+In this section, I will discuss how each of these challenges relates to the observed result of the Particle filter's reduced robustness with increasing non-linearity.
 
-There are general known challenges of the Particle filter that could also be the reason for the results of this paper.
-The four main challenges of Particles filters concerning the estimation performance are the Degeneracy Problem, Sample Improverishment, Praticle Filter Divergence and selecting the Importance Density \cite{b4}.
-In this section I discuss how each of these challenges relates to the observed result that the Particle becomes less robust as the non-linearity increases. 
 
 \subsection{Degeneracy Problem}
-The Degeneracy Problem is that after a few iterations most the weight is centered to one particle while all other particles have a weight near zero \cite{b4}.
-This problem is solved by an resampling step, where new particles are created based on the weight of the particles from the last iteration.
-Since the Condensation Algorithm \cite{b3} is used in the implementation for this paper, this problem is already addressed and thus can not be the reason for the poor results for high non-linearity. 
-% TODO: Right? Check the condensation algorithm citation, if this problem is already addressed.
+The Degeneracy Problem occurs when, after a few iterations, the weight becomes concentrated on a single particle while the weights of all other particles approach zero \cite{b4}.
+To mitigate this issue, a resampling step is typically employed, wherein new particles are generated based on the weights of particles from the previous iteration.
+In the implementation used in this paper, which utilizes the Condensation Algorithm \cite{b3}, this problem is already addressed.
+Therefore, the Degeneracy Problem cannot be attributed as the cause of the observed results in high non-linearity cases.
+
 
 \subsection{Sample Improverishment}
-The resampling step used for solving the Degeneracy Problem can become a problem, too.
-In the resampling step, particles with high weight are duplicated, which can become a problem, when the state transition does not diversify the new positions of the particles enough \cite{b4}. 
-Over time this leads to the problem where all of the particles are condensed into a single position.
+The resampling step, which aims to address the Degeneracy Problem, can itself become problematic.
+During resampling, particles with high weights are duplicated, which can be problematic if the state transition fails to sufficiently diversify the new particle positions \cite{b4}.
+This can lead to a situation where all particles collapse into a single position over time.
 
-This problem is not addressed by the Condensation algorithm used for this implementation and could therefore be a problem in the experiments of this paper. 
-For the experiment in fig. \ref{} the number of observations were increased to 200 and the plot indicates that the Particle filter performs much worse as the experiment continues.
-This is likely be because of the Sample Improverishment problem, which states that the Particle filter estimates worse over time due to all of the particles collapsing into the same point \cite{b4}. 
+The Condensation algorithm used in this implementation does not specifically address this problem, which suggests that it may have influenced the results of the experiments in this paper.
+In fig. \ref{fig:particle-filter-multiple-boundaries-higher-variance}, where the number of observations was increased to 200, the plot indicates a significant deterioration in the performance of the Particle filter over time.
+This deterioration could be attributed to the Sample Improverishment problem, which occurs when all particles converge to a single point, resulting in poorer estimation over time \cite{b4}.
 
-Although it is important to note that this problem doesn't necessarily break the Particle filter, for example in fig. \ref{fig:particle-filter-multiple-boundaries} the observations are also increased to 200, but the estimations are close to the real positions.
-But this indicates that the Particle filter is not robust for this high non-liniearity, since the estimations get much worse when the variance is increased or the number of observations are decreased unsubstantially the variance is increased or the number of observations are decreased unsubstantially.. 
+It is important to note that this problem does not necessarily break the Particle filter.
+For instance, in fig. \ref{fig:particle-filter-multiple-boundaries}, where the number of observations is also increased to 200, the estimations are reasonably close to the actual positions.
+However, this highlights that the Particle filter is not sufficiently robust for high non-linearity scenarios, as the estimations deteriorate significantly when the variance is increased or the number of observations is decreased.
 
-% TODO: Besser formulieren.
-% Ich will sagen, dass es Sinn macht und dass die Plots so aussehen, als könnte das wirklich das Problem sein
-% Über die Zeit und besonders nach der ersten boundary im higher-variance plot, werden die estimations um einiges schlechter und die estimations bewegen sich sehr stark pro time step. 
-% Das könnte dadurch erklärt werden, dass es über die Zeit immer weniger Particles gibt und irgendwann alle Particles in einer Position sind. 
-% Das würde dann dazu führen, dass die Estimations von time step zu time step springen. Und da springt es schnell zu weit, wenn ein Mal eine estimation falsch war.
 
 \subsection{Particle Filter Divergence}
+The third challenge is Particle Filter Divergence, which refers to the situation where the filter's estimations deviate significantly from the actual positions.
+This problem can arise due to inadequate tuning of the filter, incorrect model assumptions, or issues with the measurements \cite{b4}.
 
-The third problem is the Particle Filter Divergence, where the estimations diverge from the real positions. 
-This problem can occur when the filter is poorly tuned, when there are false model assumptions or when there are problems in the measurements \cite{b4}. 
+In the context of this study, although the Particle filter encounters difficulties in modeling highly nonlinear systems, the estimations generally still approximate the real positions, albeit with significant errors.
+However, the Particle Filter Divergence problem is unlikely to occur in this application.
+This is because the ball throw dynamics are explicitly incorporated into the state transition, and the observations are artificially generated, thus preventing the occurrence of this problem.
 
-Although the Particle filter struggles to model the systems for high non-linearity, the estimations generally still follow the real position, only with high errors.
-This problem can not occur for this application since the throw of the ball is implemented in the state transition and the observations are created artificially, which prevents this problem.  
 
 \subsection{Selecting the Importance Density}
-The chosen Importance Density has to fit the system and the Particle filter can only perform well when the Density is appropriately chosen for the problem \cite{b4}. 
-This can also not be a porblem, since the underlying gaussian distribution for creating the observations is known and the matching gaussian distribution for the Particle filter was used.
+
+The selection of an appropriate Importance Density is crucial for the performance of the Particle filter, as it needs to align with the characteristics of the system being modeled \cite{b4}.
+In this study, the use of a Gaussian distribution for generating observations is known, and a matching Gaussian distribution was employed for the Particle filter.
+Therefore, the selection of the Importance Density is not considered a problem, as it is appropriately chosen to align with the underlying Gaussian distribution of the observations.
 
 
 \section{Conclusion}
 
-In this paper experiments were conducted for two points of interest.
+This paper conducted experiments to address two main research questions.
 
-The first question was, how exactly the Kalman filter behaves in case of a non-linear system.  
-The result for this experiment was that the Kalman filter followed the trajectory of its estimations even though the trajectory of the observations changed direction. 
-After the errors of estimation became too big, the Kalman filter changed its direction slowly but never returning to the correct position.
+The first question aimed to investigate the behavior of the Kalman filter in a non-linear system.
+The results demonstrated that the Kalman filter followed its estimated trajectory, even when the observed trajectory changed direction.
+However, as the estimation errors accumulated, the Kalman filter slowly changed its estimation direction but it never returned to the correct position.
 
-The second question was, how the robustness of the Particle filter is affected when the non-linearity of the system increases.
-The result for this experiment was that the Particle filter performed worse when the non-linearity increased. 
-This is an interesting conclusion which may be counter intuitive.
+The second question focused on examining the impact of increasing non-linearity on the robustness of the Particle filter.
+The findings indicated that the Particle filter's performance deteriorated as the non-linearity of the system increased.
+This is an interesting conclusion which may be counter-intuitive.
 
-For both the Kalman and the Particle filter, there are numerous methods that try to solve the problems of the individual filters. 
-While the Particle filter is one of the solutions to the Kalman filter's non-linearity problem, it would be interesting how other methods behave that also try to solve the Kalman filter's problem like the Extended Kalman filter, for example.
-For the Particle filter it would also be interesting to see whether other methods that try to solve its problems would be more robust for this use case.
-
+Both the Kalman and Particle filters have their own limitations and various methods have been developed to address the challenges associated with each filter.
+Further investigations could explore alternative methods, such as the Extended Kalman filter, which aims to address the non-linearity problem of the Kalman filter.
+Additionally, exploring other techniques that aim to enhance the robustness of the Particle filter may shed light on potential improvements for this specific use case.
 
 \begin{thebibliography}{00} % TODO: 
 	\bibitem{b1} Fetzer, T., Bullmann, M., Ebner, M., Kastner, S., Deinzer, F., \& Grzegorzek, M. Interacting Multiple Model Particle Filter for Indoor Positioning Applications.
@@ -330,6 +323,7 @@ For the Particle filter it would also be interesting to see whether other method
 	\bibitem{b3} Isard, M., \& Blake, A. (1998). CONDENSATION--conditional density propagation for visual tracking. International journal of computer vision, 29(1), 5.
 	\bibitem{b4} Elfring, J., Torta, E., \& van de Molengraft, R. (2021). Particle filters: A hands-on tutorial. Sensors, 21(2), 438.
 	\bibitem{b5} Daum, F. (2005). Nonlinear filters: beyond the Kalman filter. IEEE Aerospace and Electronic Systems Magazine, 20(8), 57-69.
+	\bibitem{b6} Welch, G., \& Bishop, G. (1995). An introduction to the Kalman filter.
 
 \end{thebibliography}
 
