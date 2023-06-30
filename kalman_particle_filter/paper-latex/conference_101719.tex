@@ -27,16 +27,14 @@
 \maketitle
 
 \begin{abstract}
-% TODO: Write this as more of a Zusammenfassung and less of an introduction!
 
-%The Kalman and the Particle filter are often used for estimating the real position of objects based on noisy observations.
-% TODO: Also write that it is once again "proven" that the Kalman filter is not able to modle the non-linearities
-%In this paper I investigate how non-linearity, like the the impact of a thrown ball with a wall, can be modelled with the Kalman and Particle filter. \\
-%While the Kalman filter by definition is only applicable for linear systems, the Particle filter can also be used for non-linear systems.
-%Therefore it is interesting to explore how robust the Particle filter is for these kinds of non-linearities. \\
-%To investigate the robustness of the Particle filter to non-linearities, the Particle filter is first implemented with low variance and many observations.
-%This performance is then compared to an instance with a low amount of observations and an instance with high variance in the observations.
-%Since a low amount of observations and high variance is known to have a negative effect on the performance of the particle filter, it will be interesting to see whether the particle model can still model the non-linearity.
+The Kalman and Particle filters are popular methods for estimating positions based on noisy observations. 
+In this paper we study how the Kalman and Particle filters behave for the problem of a ball throw with a non-linear trajectory. 
+While the Kalman filter is not expected to be able to model non-linearity, the Particle filter is applicable for such problems. 
+First it is investigated how excactly the Kalman filter behaves at the point of non-linearity, i.e. when the ball hits the wall.
+Secondly the robustness of the Particle filter is tested as the non-linearity of the system increases.
+This is done by changing the number of observations and their variance as the non-linearity increases, i.e. more walls are added.
+
 \end{abstract}
 
 \begin{IEEEkeywords}

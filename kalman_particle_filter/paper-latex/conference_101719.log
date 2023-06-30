@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  29 JUN 2023 19:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  30 JUN 2023 14:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -331,13 +331,13 @@ e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -349,48 +349,51 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <figs/kalman-filter.png, id=18, 463.7325pt x 371.3875pt>
 File: figs/kalman-filter.png Graphic file (type png)
 <use figs/kalman-filter.png>
-Package pdftex.def Info: figs/kalman-filter.png  used on input line 172.
+Package pdftex.def Info: figs/kalman-filter.png  used on input line 170.
 (pdftex.def)             Requested size: 199.16928pt x 159.51216pt.
 <figs/particle-filter-one-boundary.png, id=20, 464.73625pt x 369.38pt>
 File: figs/particle-filter-one-boundary.png Graphic file (type png)
 <use figs/particle-filter-one-boundary.png>
 Package pdftex.def Info: figs/particle-filter-one-boundary.png  used on input l
-ine 215.
+ine 213.
 (pdftex.def)             Requested size: 199.16928pt x 158.30049pt.
 <figs/particle-filter-multiple-boundaries.png, id=21, 461.725pt x 368.37625pt>
 File: figs/particle-filter-multiple-boundaries.png Graphic file (type png)
 <use figs/particle-filter-multiple-boundaries.png>
 Package pdftex.def Info: figs/particle-filter-multiple-boundaries.png  used on 
-input line 221.
+input line 219.
 (pdftex.def)             Requested size: 199.16928pt x 158.89896pt.
-<figs/particle-filter-multiple-boundaries-higher-variance.png, id=22, 584.1825p
+ [2 <./figs/kalman-filter.png> <./figs/particle-filter-one-boundary.png>]
+<figs/particle-filter-multiple-boundaries-higher-variance.png, id=27, 584.1825p
 t x 366.36874pt>
 File: figs/particle-filter-multiple-boundaries-higher-variance.png Graphic file
  (type png)
 <use figs/particle-filter-multiple-boundaries-higher-variance.png>
 Package pdftex.def Info: figs/particle-filter-multiple-boundaries-higher-varian
-ce.png  used on input line 234.
+ce.png  used on input line 232.
 (pdftex.def)             Requested size: 199.16928pt x 124.91032pt.
-<figs/particle-filter-multiple-boundaries-fewer-observations.png, id=23, 613.29
+<figs/particle-filter-multiple-boundaries-fewer-observations.png, id=28, 613.29
 124pt x 370.38374pt>
 File: figs/particle-filter-multiple-boundaries-fewer-observations.png Graphic f
 ile (type png)
 <use figs/particle-filter-multiple-boundaries-fewer-observations.png>
 Package pdftex.def Info: figs/particle-filter-multiple-boundaries-fewer-observa
-tions.png  used on input line 246.
+tions.png  used on input line 244.
 (pdftex.def)             Requested size: 199.16928pt x 120.28285pt.
 
 
 LaTeX Warning: Reference `fig:particle-fitler-mulitiple-boundaries-fewer-observ
-ations' on page 2 undefined on input line 250.
+ations' on page 3 undefined on input line 248.
 
-[2 <./figs/kalman-filter.png> <./figs/particle-filter-one-boundary.png>]
 
-LaTeX Warning: Reference `' on page 3 undefined on input line 287.
+Underfull \vbox (badness 5302) has occurred while \output is active []
 
-[3 <./figs/particle-filter-multiple-boundaries.png> <./figs/particle-filter-mul
-tiple-boundaries-higher-variance.png> <./figs/particle-filter-multiple-boundari
-es-fewer-observations.png>]
+ [3 <./figs/particle-filter-multiple-boundaries.png> <./figs/particle-filter-mu
+ltiple-boundaries-higher-variance.png> <./figs/particle-filter-multiple-boundar
+ies-fewer-observations.png>]
+
+LaTeX Warning: Reference `' on page 4 undefined on input line 285.
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -410,7 +413,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  5618 strings out of 478268
  95039 string characters out of 5846346
- 398864 words of memory out of 5000000
+ 397864 words of memory out of 5000000
  23782 multiletter control sequences out of 15000+600000
  505668 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -428,7 +431,7 @@ texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2
 dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
 w/times/utmri8a.pfb>
-Output written on conference_101719.pdf (4 pages, 999998 bytes).
+Output written on conference_101719.pdf (4 pages, 1002631 bytes).
 PDF statistics:
  89 PDF objects out of 1000 (max. 8388607)
  48 compressed objects within 1 object stream
