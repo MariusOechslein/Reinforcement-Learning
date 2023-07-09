@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  8 JUL 2023 11:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  9 JUL 2023 10:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -328,10 +328,10 @@ Before submitting the final camera ready copy, remember to:
 ]
 (./blackjack-paper.aux) ) 
 Here is how much of TeX's memory you used:
- 4133 strings out of 478268
- 64500 string characters out of 5846346
- 361925 words of memory out of 5000000
- 22313 multiletter control sequences out of 15000+600000
+ 4123 strings out of 478268
+ 64457 string characters out of 5846346
+ 361861 words of memory out of 5000000
+ 22303 multiletter control sequences out of 15000+600000
  503999 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,8n,62p,250b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
