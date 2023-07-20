@@ -104,7 +104,7 @@ This is because the dealer's chances of busting increases when there are only fe
 
 \subsection{State-action space}
 For learning the basic strategy the state consists of the \textbf{player's cards value}, the \textbf{dealer's card value} and if the player has an \textbf{usable ace}. 
-This makes a total number of \textbf{250 states} possible states that need to be considered:
+This makes a total number of \textbf{250 states} that need to be considered:
 \begin{itemize}
 	\item 10 possible dealer states: 2,3,4,5,6,7,8,9,10,A
 	\item 25 possible player states:
@@ -126,18 +126,98 @@ With this huge state space it is interesting to observe how Deep Reinforcement L
 
 
 \subsection{Reinforcement Learning methods}
-% TODO: Entweder so oder ich spalte die einzelnen Methoden in einzelne Subsections auf. 
-\subsubsection{Sarsa}
+All of the Reinforcement Learning methods share the basic approach of taking actions in an environment, observing the reward and keeping track of the expected reward to each state-action \cite{b4}.
+One more thing that all of the RL methods have in common is that they to play a large number of episodes to be able to estimate the expected rewards well.
+% TODO: They share Bellman Equation, right?
+
+The implementation of RL methods Monte Carlo Control, SARSA and Q-Learning mainly differ on the following characteristics \cite{b4}:  
+\begin{itemize}
+	\item \textbf{On-policy vs. Off-policy Learning}: If the same policy is used for exploration and exploitation steps. 
+	\item \textbf{Update Rule}: With what information the updates are done. 
+	\item \textbf{Bootstrapping}: If estimations are done based on prediction of future values. 
+\end{itemize}
+
+These are the terminologies used for the rest of this paper: 
+\begin{itemize}
+	\item Q: action-value function
+	\item V: state-value function
+	\item G: cumulative reward after state is visited until the end of the episode 
+	\item R: reward
+	\item S: state
+	\item A: action
+	\item t: timestep
+	\item $\gamma$: discount rate
+	\item $\alpha$: learning rate
+\end{itemize}
+
+\subsubsection{Monte Carlo Control}
+Monte Carlo Control (MC) was also introduced in the book \textit{Reinforcement learning: An introduction} \cite{b4}.
+MC is an on-policy learning method which uses the epsilon-greedy method for deciding on whether to take a exploration or an exploitation step.
+This the update rule of Monte Carlo Control:
+\begin{equation*}
+	V(S_t) \leftarrow V(S_t) + \alpha [G_t - V(S_t)] \tag{1}
+\end{equation*}
+MC does not use Bootstrapping which means that the updates are one calculated based on real observations. 
+This property makes Monte Carlo Control converge slower \cite{b4}.  
+
+\subsubsection{SARSA}
+The State-Action-Reward-State-Action (SARSA) method was introduced in the book \textit{Reinforcement learning: An introduction} \cite{b4} and counts as a Temporal Difference Learning method.
+SARSA is also an on-policy learning method which means that the same policy is used for exploration and exploitation steps.  
+For the update rule SARSA takes the reward of the next state in consideration:
+\begin{equation*}
+	Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha [R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t)] \tag{2}
+\end{equation*}
+This means that SARSA uses bootstrapping since $Q(S_{t+1})$ is used for updating $Q(S_t, A_t)$. 
+
 \subsubsection{Q-Learning}
-\subsubsection{Temporal Difference Learning}
+Q-learning first introduced by Watkins \cite{b5} and taken up in \cite{b4} also counts as Temporal Difference Learning method.
+Q-learning is an off-policy learning method \cite{b4}.
+\begin{equation*}
+	Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha [R_{t+1} + \gamma \max_a Q(S_{t+1}, a) - Q(S_t, A_t)] \tag{3}
+\end{equation*}
+
+Although on-policy learning has its advantages, for the case of Blackjack the off-policy learning is expected to perform better since the target policy does not have to do exploration steps which lower the expected reward.
 
 
-\subsection{Deep Reinforcement Learning}
-% TODO: Absatz zu allgemeinen Ansatz (From Atari paper)
+\subsection{Deep Q-Learning}
+Deep Q-Learning (DQN) originated in 2013 in the DeepMind paper \textit{Playing Atari with Deep Reinforcement Learning} \cite{b2}.
+The main idea of DQN to replace the Q-Table with a deep neural network \cite{b2}. 
+Further, two important implementation details are the usage of an Experience Replay Buffer and a Target Neural Network which are presented in the following section.
 
-% TODO: Absatz zu Replay Buffer (From paper)
+The pseudo-code for the DQN can be inspected in the \textit{Playing Atari with Deep Reinforcement Learning} paper \cite{b2}.
+For a deeper explanation of the DQN architecture is \textit{Implementing the Deep Q-Network} \cite{b6} a helpful resource. 
 
+\subsubsection{Experience Replay Buffer} \label{replay-buffer}
+% TODO: Experience Replay was already there in Atari paper
+% TODO: Absatz zu Replay Buffer
+At each step of the training loop the Experience Replay Buffer is filled with the Experience of this training step. 
+An Experience consists of:
+\begin{itemize}
+	\item state
+	\item action
+	\item reward
+	\item next state
+\end{itemize}
+At every training step a random mini-batch of the Buffer is then sampled and used for the training of the neural network.
+
+The Experience Buffer has the advantage of reusing Experiences for training the neural network which increases the data effiency \cite{b2}.
+Additionally, sampling random mini-batches uniformly introduces the advantage of breaking the dependency of a state with its preceeding state which achieves a more general neural network \cite{b2}. 
+
+The maximum size of the Buffer is set to 10.000.
+When the maximum size is reached, the oldest Experiences are removed and for new Experiences to be added. 
+
+\subsubsection{Target Neural Network} \label{target-network}
 % TODO: Absatz zu target network (From paper)
+In traditional Q-Learning the current Q-value is updated by the estimated Q-value of the next state.
+To facilitate the same update rule in Deep Q-Learning a Target Neural Network, called $Q^*$ in the DeepMind paper \cite{b2}, is used for predicting the returns of the next state \cite{b6}.
+These predicted returns of the next state are then used for the loss function and ultimately for the gradient descent of the learning neural network \cite{b6}. 
+
+The weights of the Target Neural Network are fixed and only get updated by the weights of the training network. 
+In the paper \cite{b6} this update of the weights is done only every few training steps with the advantage of faster training time. 
+In the implementation for this paper, the updates are done every training step but with a update rate of only 0.005 to prevent overfitting.
+
+The advantages of using the target neural network are more stable training and that the errors in estimation are better controlled \cite{b6}.
+
 
 
 \section{Results}
@@ -193,6 +273,8 @@ With this huge state space it is interesting to observe how Deep Reinforcement L
 \bibitem{b1} Thorp, E. O. (1966). Beat the dealer: A winning strategy for the game of twenty-one (Vol. 310). Vintage.
 \bibitem{b2} Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., \& Riedmiller, M. (2013). Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602.
 \bibitem{b3} Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness, J., Bellemare, M. G., ... \& Hassabis, D. (2015). Human-level control through deep reinforcement learning. nature, 518(7540), 529-533.
+\bibitem{b4} Sutton, R. S., \& Barto, A. G. (2018). Reinforcement learning: An introduction. MIT press.
+\bibitem{b5} Watkins, C. J., \& Dayan, P. (1992). Q-learning. Machine learning, 8, 279-292.
+\bibitem{b6} Roderick, M., MacGlashan, J., \& Tellex, S. (2017). Implementing the deep q-network. arXiv preprint arXiv:1711.07478.
 \end{thebibliography}
-
 \end{document}
