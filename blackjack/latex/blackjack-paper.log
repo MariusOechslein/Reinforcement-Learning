@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  20 JUL 2023 22:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  20 JUL 2023 23:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -298,13 +298,12 @@ Underfull \hbox (badness 1448) in paragraph at lines 38--40
 n-ing, Monte
  []
 
+[1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-LaTeX Warning: Citation `?' on page 1 undefined on input line 58.
 
-
-LaTeX Warning: Citation `?' on page 1 undefined on input line 59.
-
+]
 LaTeX Font Info:    Trying to load font information for U+msa on input line 97.
+
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -314,33 +313,24 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 97.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-]
+)
 Overfull \hbox (3.79692pt too wide) in paragraph at lines 111--112
 []| \OT1/ptm/m/n/10 No Ace: 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--168
+Underfull \hbox (badness 10000) in paragraph at lines 164--167
  \OT1/ptm/m/it/10 2) SARSA: [][] \OT1/ptm/m/n/10 The State-Action-Reward-State-
 Action
  []
 
 
-Underfull \hbox (badness 7486) in paragraph at lines 165--168
+Underfull \hbox (badness 7486) in paragraph at lines 164--167
 \OT1/ptm/m/n/10 (SARSA) method was also in-tro-duced in the book
  []
 
 
-Underfull \hbox (badness 1776) in paragraph at lines 165--168
-\OT1/ptm/m/it/10 Re-in-force-ment learn-ing: An in-tro-duc-tion \OT1/ptm/m/n/10
- [4] and counts
- []
-
-
-Overfull \hbox (9.3058pt too wide) detected at line 170
+Overfull \hbox (9.3058pt too wide) detected at line 169
 \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 ) \
 OMS/cmsy/m/n/10   \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\
 OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 R[] \OT1
@@ -350,7 +340,7 @@ m/m/it/10 S[]; A[]\OT1/cmr/m/n/10 )]
  []
 
 
-Overfull \hbox (15.39021pt too wide) detected at line 178
+Overfull \hbox (15.39021pt too wide) detected at line 177
 \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 ) \
 OMS/cmsy/m/n/10   \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\
 OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 R[] \OT1
@@ -371,31 +361,27 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3] (./blackjack-paper.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[3] (./blackjack-paper.aux) ) 
 Here is how much of TeX's memory you used:
- 4116 strings out of 478268
- 64371 string characters out of 5846346
- 373906 words of memory out of 5000000
- 22303 multiletter control sequences out of 15000+600000
+ 4114 strings out of 478268
+ 64352 string characters out of 5846346
+ 373891 words of memory out of 5000000
+ 22301 multiletter control sequences out of 15000+600000
  501432 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,62p,305b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
-xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
-ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
-e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
-022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
-22/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022
-/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dis
-t/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
-ype1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/t
-imes/utmri8a.pfb>
-Output written on blackjack-paper.pdf (3 pages, 126303 bytes).
+ 55i,8n,62p,304b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvip
+s/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
+fb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/l
+ocal/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texl
+ive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/t
+exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on blackjack-paper.pdf (3 pages, 125933 bytes).
 PDF statistics:
  65 PDF objects out of 1000 (max. 8388607)
  39 compressed objects within 1 object stream
