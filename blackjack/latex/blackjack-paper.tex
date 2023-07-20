@@ -24,29 +24,15 @@
 }
 \maketitle
 
-% Structure:
-% 0. Abstract
-%	. Zusammenfassung von ganzen Paper (am Ende schreiben!)
-% 1. Introduction
-%	. Blackjack was solved by Edward Thorb in 1960 and by numerous Reinforcement Learning papers since then (Establishing Research Area)
-%	. To my knowledge the does not focus on <Insert my variations> (Establising a Niche)
-%	. To investigate this area, I <Insert my approach> (Occupying the Niche)
-% 2. Methods
-%	. Section: Blackjack (Basic Description of the Game, State spaces (Math), Possible Actions (Math), Which Actions do I permit?)
-%	. Section: Reinforcement Learning Methods (Monte Carlo (Math), ...)
-%	. Section: My two variations and why they are interesting
-% 3. Results
-%	. Section: First Variation
-%	. Section: Second Variation
-% 4. Discussion
-% 5. Conclusion
-
+% TODO: Main focus of paper:
+% . Zuerst implementiere ich "traditional RL-methods" (Sarsa, Q-Learning, TD) als Baseline? 
+% . Dann implementiere ich Deep Reinforcement Learning und versuche die Baseline zu erreichen.
+% . Dann erhöhe ich den state-space durch das genaue counting aller Karten 
+% . -> Hierbei möchte ich vergleichen, wie sich DQN im Vergleich zu traditionellen RL-Methoden verhält. 
+% .		Ich habe 3 traditionelle, weil der Test dadurch allgemeingültiger ist und nicht von der Implementierungsdetails einer einzelnen Methode abhängt.
 
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -54,44 +40,89 @@ or Math in Paper Title or Abstract.
 \end{IEEEkeywords}
 
 \section{Introduction}
-% TODO
-\begin{enumerate}
-	\item Blackjack was solved by Edward Thorb in 1960 and by numerous Reinforcement Learning papers since then (Establishing Research Area)
-	\item To my knowledge the does not focus on <Insert my variations> (Establising a Niche)
-	\item To investigate this area, I <Insert my approach> (Occupying the Niche)
-\end{enumerate}
+\subsection{Blackjack and Reinforcement Learning} 
+Blackjack is a popular card game played in casinos worldwide. 
+In 1962 the mathematician Edward Thorb published a Book on how to beat the house in Blackjack \cite{b1}. 
+This made is possible for players to win money in the game of Blackjack in casinos. 
+Although the casinos changed their rules to prevent the player from winning in the game of blackjack impossible now, the game is still an interesting subject to mathematical modeling due to its probabilistic nature.    
+
+Edward Thorb introduced the idea of card counting with the Complete Point Count System \cite{b1} which makes it possible for players to keep track of a score while playing that indicates their chances of winning.
+The Complete Point Count System keeps track of a counter that adds +1 or -1 based on each card that are seen by the player. 
+This easy counting method makes it possible for players to count cards while playing the game. 
+
+\subsection{Reinforcement Learning for Blackjack}
+The game can be modeled as a Markov Decision Process which makes it possible to apply Reinforcement Learning.
+With todays computation power it is now possible to let the computer play over 100.000.000 games, which wasn't possible in the 1960s. 
+The baseline goal is therefore to at least achieve the basic strategy of Edward Thorb \cite{b1} with Reinforcement Learning methods.
+
+All of the Reinforcement Learning methods play a large number of games while keeping track of a Q-Table containing the expected returns to each of the possible game states \cite{?}.
+The different Reinforcement Learning methods like Sarsa, Q-Learning and Temporal Difference only take a different approach of updating this Q-Table \cite{?}.
+Although the Reinforcement Learning methods are very powerful, they require an increasing amount of games to be able to model the Q-Table as the state-space of the game increases. 
+In this paper we therefore investigate how well the Reinforcement Learning methods Sarsa, Q-Learning and Temporal Difference Learning perform as we increase the state-space by changing the card counting method. 
+We change the card counting method by keeping track of the values of every seen card and not just keeping track of a counter. 
+
+\subsection{Deep Reinforcement Learning}
+In 2013 openAI published the paper "Playing Atari with Deep Reinforcement Learning" \cite{b2}, combining Deep Learning to Reinforcement Learning.
+The idea of Deep Reinforcement Learning is to replace the Q-Table with a deep neural network.
+This makes it possible to model more complex state-spaces since the deep neural network is able to reduce dimensionality of the state while keeping the most important information \cite{?}.
+
+% TODO:  
+
+
+%\begin{enumerate}
+%	\item Blackjack was solved by Edward Thorb in 1960 and by numerous Reinforcement Learning papers since then (Establishing Research Area)
+%	\item To my knowledge the does not focus on <Insert my variations> (Establising a Niche)
+%	\item To investigate this area, I <Insert my approach> (Occupying the Niche)
+%\end{enumerate}
+
 
 \section{Methods}
 
-\subsection{The game of Blackjack}
-% TODO:
+\subsection{The Blackjack Environment}
 \begin{enumerate}
-	\item Basic Description of the Game
 	\item State Spaces (Math)
 	\item Actions (Math) (Doubling Down, Hitting, Splitting, ...)
 	\item Which Actions do I permit in my implementation? and why?
 \end{enumerate}
 
-\subsection{Reinforcement Learning method - Monte Carlo}
-% TODO: 
+\subsection{Reinforcement Learning methods}
+% TODO: Entweder so oder ich spalte die einzelnen Methoden in einzelne Subsections auf. 
+\subsubsection{Sarsa}
+\subsubsection{Q-Learning}
+\subsubsection{Temporal Difference Learning}
 
-\subsection{<Insert my variations>}
-% TODO: 
 
+\subsection{Deep Reinforcement Learning}
+% TODO: Absatz zu allgemeinen Ansatz (From Atari paper)
+
+% TODO: Absatz zu Replay Buffer (From paper)
+
+% TODO: Absatz zu target network (From paper)
 
 
 \section{Results}
 
+\subsection{Basic Strategy}
+% TODO: Basic Strategy von allen 4 Methoden erreicht. Wie möchte ich das zeigen? -> Policy?
 
-\subsection{<Insert First Variation>}
-
-\subsection{<Insert Second Variation>}
-
+\subsection{Increased state space - counting all cards}
+% TODO: Counting all cards (sollte die state-space erheblich erhöhen). Wie verhalten sich die 3 traditionellen im Vergleich zu DQN?
+% TODO: Plots: Vllt. Value functions? -> Es ist schwierig das darzustellen.
+% TODO: Plots: Vllt. T-SNE plot?
 
 \section{Discussion}
+% TODO: ? Haben die Methoden so gut abgeschlossen, wie erwartet? 
+% TODO: . Wie haben sich die Methoden im Vergleich verhalten? Wie lässt sich das erklären?
+% TODO: . Was bedeuten diese Ergebnisse? -> Dass DQN für high state-space eingesetzt werden sollte. Dass die anderen Methoden aber auch gut sind, wenn der state-space nicht soo hoch ist. 
+% TODO: . ? Was noch?  
 
 
 \section{Conclusion}
+% TODO: Es wäre interessant: 
+% . Mit Geld spielen. Ob es DQN schafft einen höheren Expected Reward zu erreichen als traditionelle Methoden 
+% . Verhalten von DQN ohne Verbesserungen (Replay Buffer und Target network)
+% . Ob sich das trainierte DQN einfach auf andere (ähnliche) Kartenspiele, wo es ums Punkte sammeln geht, anwenden lässt - Ohne eine Veränderung machen zu müssen.
+	% . Das haben sie früher bei Atari auch ausprobiert und es ist sehr interessant gewesen.
 
 
 
@@ -119,7 +150,8 @@ or Math in Paper Title or Abstract.
 %\end{figure}
 
 \begin{thebibliography}{00}
-\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
+\bibitem{b1} Thorp, E. O. (1966). Beat the dealer: A winning strategy for the game of twenty-one (Vol. 310). Vintage.
+\bibitem{b2} Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., \& Riedmiller, M. (2013). Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602.
 \end{thebibliography}
 
 \end{document}
