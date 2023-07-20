@@ -11,7 +11,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Reinforcment Learning for Blackjack}
+\title{Deep Reinforcement Learning for Blackjack}
 
 \author{
     \IEEEauthorblockN{Marius Oechslein}
@@ -62,28 +62,68 @@ In this paper we therefore investigate how well the Reinforcement Learning metho
 We change the card counting method by keeping track of the values of every seen card and not just keeping track of a counter. 
 
 \subsection{Deep Reinforcement Learning}
-In 2013 openAI published the paper "Playing Atari with Deep Reinforcement Learning" \cite{b2}, combining Deep Learning to Reinforcement Learning.
+In 2013 DeepMind published the paper \textit{Playing Atari with Deep Reinforcement Learning} \cite{b2}, combining Deep Learning to Reinforcement Learning.
 The idea of Deep Reinforcement Learning is to replace the Q-Table with a deep neural network.
-This makes it possible to model more complex state-spaces since the deep neural network is able to reduce dimensionality of the state while keeping the most important information \cite{?}.
+This makes it possible to estimate the expected returns even for complex state-spaces.
 
-% TODO:  
+In this paper we first investigate whether Deep RL is also able to achieve the baseline of the basic strategy of Edward Thorb \cite{b1}.
+Secondly we compare how the Deep RL performs compared to the more traditional RL-methods like Sarsa, Q-Learning and Temporal Difference Learning.
 
-
-%\begin{enumerate}
-%	\item Blackjack was solved by Edward Thorb in 1960 and by numerous Reinforcement Learning papers since then (Establishing Research Area)
-%	\item To my knowledge the does not focus on <Insert my variations> (Establising a Niche)
-%	\item To investigate this area, I <Insert my approach> (Occupying the Niche)
-%\end{enumerate}
+% TODO: Do I have the structure of: Establishing niche and occupying niche?
 
 
 \section{Methods}
 
 \subsection{The Blackjack Environment}
-\begin{enumerate}
-	\item State Spaces (Math)
-	\item Actions (Math) (Doubling Down, Hitting, Splitting, ...)
-	\item Which Actions do I permit in my implementation? and why?
-\end{enumerate}
+The game of Blackjack start by the dealer and the player recieving two cards where the player is only allowed to see one of the dealer's cards and his own cards
+The player only has the two actions of taking another card (Hitting) and not taking another card (Standing). 
+Although the real rules of Blackjack extend this action-space by options like Doubling Down and Splitting, in this paper we only focus on Standing and Hitting. 
+The Blackjack Environment used for the implementation of this paper only focuses on Hitting and Standing. 
+
+The player can then hit as many as he wants with the goal of coming as close to the cards value of 21 as possible.
+After the player finished his turn the dealer hits as long as his cards value are below or equal 16.
+At the end of one game the player's return is +1, -1 or 0 based on whether it was a win, loss or draw.
+
+To model the basic strategy with Reinforcement learning, one game like that can be seen as one episode. 
+This is possible since the basic strategy only focuses on whether the player should Hit or Stand based on the dealer's card value and the player's cards value.  
+
+When introducing card counting, one episode has to be extended by playing multiple games in one episode. 
+This is necessary since card counting is dependent on seeing a high number played cards since the player's chances change depending on the ratio of low cards/ high cards played. 
+In the case of one game the player on average see 3-5 cards which is not enough for an imbalanced ratio between high and low cards.
+Therefore one episode is extended to playing through one whole deck.
+
+The Complete Point Count System \cite{b1} keeps a running score and updating it every time the player sees a card:
+\begin{itemize}
+	\item +1 for: 2, 3, 4, 5, 6, 7
+	\item -1 for: 10, A
+	\item 0 for: 8, 9 
+\end{itemize}
+It is favourable for the player when the running score is high \cite{b1}.
+And it is favourable for the dealer when the running score is low.
+This is because the dealer's chances of busting increases when there are only few low cards left in the deck.
+
+\subsection{State-action space}
+For learning the basic strategy the state consists of the \textbf{player's cards value}, the \textbf{dealer's card value} and if the player has an \textbf{usable ace}. 
+This makes a total number of \textbf{250 states} possible states that need to be considered:
+\begin{itemize}
+	\item 10 possible dealer states: 2,3,4,5,6,7,8,9,10,A
+	\item 25 possible player states:
+		\subitem No Ace: 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+		\subitem With Ace: 13,14,15,16,17,18,19,20
+\end{itemize}
+% player: 2 bis 21 = 2,3,4,5,6,7,9,10,11,12,13,14,15,16,17,18,19,20,21 = 19 
+
+For learning the Complete Point Count System the state has to be extended by \textbf{running score}.
+The running score in one game can at most be 24 (= 6 cards * 4 suits) and at least -20 (= 5 cards * 4 suits).
+This would increase the state-space to \textbf{11.000 states} (= 250 states * (24 - 20)) for the Complete Point Count System, although the running score around 0 are far more likely than 24 or -20.
+
+And when making the card counting method more complex by counting every value of the seen cards, the state space increases to approximately \textbf{907.000.000 states} (= 250 states * ((52 cards / 4 suits) - 3 face cards)! ) for playing through one card deck.  
+Altough the actual state-space is a little less considering that the player can only see one card of the dealer.
+The most important thing to note here is that the state-space explodes when using the more complex card counting method. 
+% TODO: Is this a correct calculation?
+
+With this huge state space it is interesting to observe how Deep Reinforcement Learning performs and how other Reinforcement Learning methods perform compared to that. 
+
 
 \subsection{Reinforcement Learning methods}
 % TODO: Entweder so oder ich spalte die einzelnen Methoden in einzelne Subsections auf. 
@@ -152,6 +192,7 @@ This makes it possible to model more complex state-spaces since the deep neural 
 \begin{thebibliography}{00}
 \bibitem{b1} Thorp, E. O. (1966). Beat the dealer: A winning strategy for the game of twenty-one (Vol. 310). Vintage.
 \bibitem{b2} Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., \& Riedmiller, M. (2013). Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602.
+\bibitem{b3} Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness, J., Bellemare, M. G., ... \& Hassabis, D. (2015). Human-level control through deep reinforcement learning. nature, 518(7540), 529-533.
 \end{thebibliography}
 
 \end{document}
