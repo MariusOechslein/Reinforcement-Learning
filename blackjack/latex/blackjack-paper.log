@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  21 JUL 2023 20:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  21 JUL 2023 22:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -297,35 +297,45 @@ e
 
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 97.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 80.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 97.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 80.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (3.79692pt too wide) in paragraph at lines 111--112
+Overfull \hbox (3.79692pt too wide) in paragraph at lines 92--93
 []| \OT1/ptm/m/n/10 No Ace: 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--169
+Underfull \hbox (badness 3930) in paragraph at lines 98--99
+\OT1/ptm/m/n/10 sig-nif-i-cantly ex-pands the state space to ap-prox-i-mately
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
  \OT1/ptm/m/it/10 2) SARSA: [][] \OT1/ptm/m/n/10 The State-Action-Reward-State-
 Action
  []
 
 
-Underfull \hbox (badness 7486) in paragraph at lines 166--169
-\OT1/ptm/m/n/10 (SARSA) method was also in-tro-duced in the book
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
+\OT1/ptm/m/n/10 Learn-ing fam-ily, was also in-tro-duced in the book
  []
 
 
-Overfull \hbox (9.3058pt too wide) detected at line 171
+Underfull \hbox (badness 1546) in paragraph at lines 137--138
+\OT1/ptm/m/n/10 for ex-plo-ration and ex-ploita-tion with the epsilon-greedy
+ []
+
+
+Overfull \hbox (9.3058pt too wide) detected at line 140
 \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 ) \
 OMS/cmsy/m/n/10   \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\
 OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 R[] \OT1
@@ -335,7 +345,7 @@ m/m/it/10 S[]; A[]\OT1/cmr/m/n/10 )]
  []
 
 
-Overfull \hbox (15.39021pt too wide) detected at line 179
+Overfull \hbox (15.39021pt too wide) detected at line 147
 \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 ) \
 OMS/cmsy/m/n/10   \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\
 OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 R[] \OT1
@@ -349,7 +359,7 @@ cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 )]
 File: figures/MC/basic-100-million/policy.png Graphic file (type png)
 <use figures/MC/basic-100-million/policy.png>
 Package pdftex.def Info: figures/MC/basic-100-million/policy.png  used on input
- line 241.
+ line 185.
 (pdftex.def)             Requested size: 199.16928pt x 81.33838pt.
 <figures/MC/basic-100-million/value-function-no-usuable-ace.png, id=21, 540.017
 5pt x 551.05875pt>
@@ -357,76 +367,74 @@ File: figures/MC/basic-100-million/value-function-no-usuable-ace.png Graphic fi
 le (type png)
 <use figures/MC/basic-100-million/value-function-no-usuable-ace.png>
 Package pdftex.def Info: figures/MC/basic-100-million/value-function-no-usuable
--ace.png  used on input line 253.
+-ace.png  used on input line 196.
 (pdftex.def)             Requested size: 199.16928pt x 203.24109pt.
-<figures/DQN/counting-180000/policy-counting-7.png, id=22, 981.6675pt x 389.455
+ [3 <./figures/MC/basic-100-million/policy.png> <./figures/MC/basic-100-million
+/value-function-no-usuable-ace.png>]
+<figures/DQN/counting-180000/policy-counting-7.png, id=27, 981.6675pt x 389.455
 pt>
 File: figures/DQN/counting-180000/policy-counting-7.png Graphic file (type png)
 
 <use figures/DQN/counting-180000/policy-counting-7.png>
 Package pdftex.def Info: figures/DQN/counting-180000/policy-counting-7.png  use
-d on input line 266.
+d on input line 207.
 (pdftex.def)             Requested size: 199.16928pt x 79.01276pt.
 
 
-LaTeX Warning: Reference `fig:dqn-card-counting-5' on page 3 undefined on input
- line 274.
+LaTeX Warning: Reference `fig:dqn-card-counting-5' on page 4 undefined on input
+ line 214.
 
-[3 <./figures/MC/basic-100-million/policy.png>]
 <figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-111111
-1111.png, id=27, 974.64125pt x 433.62pt>
+1111.png, id=28, 974.64125pt x 433.62pt>
 File: figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-1
 111111111.png Graphic file (type png)
 <use figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-11
 11111111.png>
 Package pdftex.def Info: figures/Q-Learning/advanced-counting-10-million/policy
--all-cards-played-1111111111.png  used on input line 286.
+-all-cards-played-1111111111.png  used on input line 224.
 (pdftex.def)             Requested size: 199.16928pt x 88.60815pt.
 <figures/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png, id=
-28, 973.6375pt x 434.62375pt>
+29, 973.6375pt x 434.62375pt>
 File: figures/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png
  Graphic file (type png)
 <use figures/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png>
 
 Package pdftex.def Info: figures/Q-Learning/advanced-counting-10-million/policy
--5-8-not-played.png  used on input line 299.
+-5-8-not-played.png  used on input line 236.
 (pdftex.def)             Requested size: 199.16928pt x 88.90611pt.
 <figures/Q-Learning/advanced-counting-10-million/policy-some-cards-played-10101
-01010.png, id=29, 970.62625pt x 430.60875pt>
+01010.png, id=30, 970.62625pt x 430.60875pt>
 File: figures/Q-Learning/advanced-counting-10-million/policy-some-cards-played-
 1010101010.png Graphic file (type png)
 <use figures/Q-Learning/advanced-counting-10-million/policy-some-cards-played-1
 010101010.png>
 Package pdftex.def Info: figures/Q-Learning/advanced-counting-10-million/policy
--some-cards-played-1010101010.png  used on input line 310.
+-some-cards-played-1010101010.png  used on input line 245.
 (pdftex.def)             Requested size: 199.16928pt x 88.36078pt.
-<figures/DQN/rewards_over_time_10000.png, id=30, 432.61626pt x 340.27126pt>
+<figures/DQN/rewards_over_time_10000.png, id=31, 432.61626pt x 340.27126pt>
 File: figures/DQN/rewards_over_time_10000.png Graphic file (type png)
 <use figures/DQN/rewards_over_time_10000.png>
 Package pdftex.def Info: figures/DQN/rewards_over_time_10000.png  used on input
- line 329.
+ line 258.
 (pdftex.def)             Requested size: 199.16928pt x 156.65646pt.
-<figures/DQN/advanced/policy-1010101010.png, id=31, 983.675pt x 397.485pt>
+<figures/DQN/advanced/policy-1010101010.png, id=32, 983.675pt x 397.485pt>
 File: figures/DQN/advanced/policy-1010101010.png Graphic file (type png)
 <use figures/DQN/advanced/policy-1010101010.png>
 Package pdftex.def Info: figures/DQN/advanced/policy-1010101010.png  used on in
-put line 340.
+put line 267.
 (pdftex.def)             Requested size: 199.16928pt x 80.47813pt.
- [4 <./figures/MC/basic-100-million/value-function-no-usuable-ace.png> <./figur
-es/DQN/counting-180000/policy-counting-7.png> <./figures/Q-Learning/advanced-co
-unting-10-million/policy-all-cards-played-1111111111.png> <./figures/Q-Learning
-/advanced-counting-10-million/policy-5-8-not-played.png> <./figures/Q-Learning/
-advanced-counting-10-million/policy-some-cards-played-1010101010.png>]
+[4 <./figures/DQN/counting-180000/policy-counting-7.png> <./figures/Q-Learning/
+advanced-counting-10-million/policy-all-cards-played-1111111111.png> <./figures
+/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png> <./figures/
+Q-Learning/advanced-counting-10-million/policy-some-cards-played-1010101010.png
+>]
 <figures/DQN/advanced/policy-low-cards-played.png, id=40, 982.67125pt x 395.477
 5pt>
 File: figures/DQN/advanced/policy-low-cards-played.png Graphic file (type png)
 <use figures/DQN/advanced/policy-low-cards-played.png>
 Package pdftex.def Info: figures/DQN/advanced/policy-low-cards-played.png  used
- on input line 356.
+ on input line 278.
 (pdftex.def)             Requested size: 199.16928pt x 80.15616pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 
 
 ** Conference Paper **
@@ -453,7 +461,7 @@ Here is how much of TeX's memory you used:
  22365 multiletter control sequences out of 15000+600000
  501432 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,62p,323b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 55i,8n,62p,692b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
@@ -465,7 +473,7 @@ e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
 t/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
 ype1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on blackjack-paper.pdf (5 pages, 1223521 bytes).
+Output written on blackjack-paper.pdf (5 pages, 1222730 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream
