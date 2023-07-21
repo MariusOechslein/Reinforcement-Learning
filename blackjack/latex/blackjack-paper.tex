@@ -52,12 +52,12 @@ This easy counting method makes it possible for players to count cards while pla
 
 \subsection{Reinforcement Learning for Blackjack}
 The game can be modeled as a Markov Decision Process which makes it possible to apply Reinforcement Learning.
-The baseline goal is therefore to at least achieve the basic strategy of Edward Thorb \cite{b1} with Reinforcement Learning methods.
+The baseline goal is therefore the basic strategy of Edward Thorb \cite{b1} with Reinforcement Learning methods.
 
 All of the Reinforcement Learning methods play a large number of games while keeping track of a Q-Table containing the expected returns to each of the possible game states \cite{b4}.
 The different Reinforcement Learning methods like Monte Carlo Control, SARSA and Q-Learning only take a different approach of updating this Q-Table \cite{b4}.
 Although they are powerful methods, due to their nature of learning, they require a high amount of games to be able to model the Q-Table as the state-space of the game increases. 
-In this paper we therefore investigate how well these Reinforcement Learning methods (Monte Carlo Control, SARSA and Q-Learning) perform as we increase the state-space by changing the card counting method. 
+In this paper we hence investigate how well these Reinforcement Learning methods (Monte Carlo Control, SARSA and Q-Learning) perform as we increase the state-space by changing the card counting method. 
 We make the card counting method more complex by keeping track of the values of every observed card compared to a single counter in the case of the Complete Point Count System \cite{b1}.
 
 \subsection{Deep Reinforcement Learning}
@@ -90,7 +90,7 @@ It is possible to model only one game as one episode since the basic strategy wo
 When introducing card counting on the other hand, one episode has to be extended to playing multiple games within one episode. 
 This is necessary because card counting works with the information of cards already played in addition to the cards of the current game.
 The relation between high cards to low cards left in the deck influence the player's chances of winning.
-When increasing one episode to playing through a whole deck, the chances of an imbalanced card deck increase which therefore makes card counting more interesting. 
+When increasing one episode to playing through a whole deck, the chances of an imbalanced card deck increase which consequently makes card counting more interesting. 
 
 The Complete Point Count System \cite{b1} keeps a running score and updating it every time the player sees a card:
 \begin{itemize}
@@ -120,7 +120,7 @@ Although it is important to note that a counting score around 0 is far more like
 
 When making the card counting method more complex by keeping track of every value of played cards, the state space increases to approximately \textbf{1.048.576.000 states} (= 250 states * (($4^9$ number cards * (4 face cards * 4 states))) for playing through one card deck. 
 Unfortunately with such a big state space the calculations ran into RAM problems with the Google Colab Free version (12.7 GB RAM).
-Therefore a simpler card counting method was chosen by not keeping track of the exact amount of each of the card-values but only if a card-value has been played or not. 
+For that reason a simpler card counting method was chosen by not keeping track of the exact amount of each of the card-values but only if a card-value has been played or not. 
 This can still be informative for predicting the player's chances since it directly tells when all four cards are left in the deck of some card-value.
 
 When using this advanced card counting method the state space is \textbf{1.024.000 states} (= 250 states * (($2^9$ * (4 face cards * 2 states))) when playing through one card deck.
@@ -234,6 +234,10 @@ Figure \ref{fig:monte-carlo-basic-strategy} for example is very close to Edward 
 Although it is important to note that SARSA and Deep Q-Learning  methods needed substantially more training time to achieve this goal than Monte Carlo Control and Q-Learning. 
 An exact training time comparison was not conducted since the main focus of this paper is whether the methods are able to estimate the Q-Table well as the state-space increases and not in which timeframe they are able to do so.
 
+One more important note is that it is unclear with which exact rules Edward Thorb did his calculations in the book \textit{Beat the dealer} \cite{b1}. 
+The rules are probably close to the basic Blackjack rules used in the implementation is this paper but we can not be certain. 
+It is therefore unlikely to achieve the exact same basic strategy as Edward Thorb did \cite{b1}.
+
 % Show Q-Learning Policy as example
 \begin{figure}
 	\centering
@@ -271,7 +275,7 @@ This follows the Edward Thorb's statement that there is a higher chance for bust
 
 Note that the policy in Figure \ref{fig:dqn-card-counting-5} does not change much compared to the basic strategy when the player has a usable ace. 
 This makes sense since the ace can be counted as 1 if the player's hand goes over 21 after hitting a card.
-Hitting a card in that case therefore only improves the player's chances of winning which is why he should hit in that game state. 
+Hitting a card in that case consequently only improves the player's chances of winning which is why he should hit in that game state. 
 
 
 \subsection{Increased state space - counting all cards}
@@ -287,7 +291,7 @@ For these experiments the card counting method was more complex, increasing the 
 \end{figure}
 
 In Figure \ref{fig:q-learning-advanced-all-cards-played} the policy is shown for the case where all cards have been played at least once.
-It is important to note here that this is the most common state and the policy should therefore come close the policy for the basic strategy \cite{b1}.
+It is important to note here that this is the most common state and the policy should thus come close the policy for the basic strategy \cite{b1}.
 % TODO: Ist das hier richtig, oder sollte das in die Discussion?
 Although the policy with this advanced counting method differs a little bit from the basic strategy which is probably due to an insufficient amount of games played in this state.
 Even though this state is the most common, it is still uncertain to reach this state when playing through one deck.
@@ -314,6 +318,11 @@ And Figure \ref{fig:q-learning-advanced-every-other} shows the case of an even m
 The results for the RL-methods look very similar and indicate the same conclusion that the RL-methods are unable to model the Q-table as the state-space increases drastically without increasing the training episodes by the same magnitude. 
 
 \subsubsection{Deep Q-Learning}
+A general note on Deep Q-Learning is that one training iteration takes more time than in the other RL-methods since a neural network has to be trained. 
+Secondly, to train a deep neural network, a large amount of training iterations are needed. 
+Combining these two facts indicates that training Deep Q-Learning takes more time than training traditional RL-methods which was also experienced for the calculation of this paper.
+
+For that reason, in the calculations of this paper, the traditional RL-methods were trained on approximately 1.000 times the magnitude of episodes compared to the Deep Q-Learning method.
 
 \begin{figure}
 	\centering
@@ -356,68 +365,24 @@ Although it is important to note that those two states are not equivalent since 
 % TODO: Plots: Vllt. T-SNE plot?
 
 
-
-
-% TODO: Write these things into last section!
-%\section{Discussion}
-% TODO: Basic strategy: It's not sure how Edward Thorb did the calulations, with which rules. That's why it's only important that the policy is exactly the same. 
-
-% TODO: Es ist hervorzuheben, dass alle RLmethoden sehr ähnlich gut abgeschnitten haben. Der einzige Unterschied war die training time. In diesem paper wurde aber nur auf results fokussiert. 
-
-% TODO: DQN goes in the right direction, training time is very long, but it needs high training time to be able to estimate the policy better. 
-
-% TODO: . Wie haben sich die Methoden im Vergleich verhalten? Wie lässt sich das erklären?
-% TODO: . Was bedeuten diese Ergebnisse? -> Dass DQN für high state-space eingesetzt werden sollte. Dass die anderen Methoden aber auch gut sind, wenn der state-space nicht soo hoch ist. 
-% TODO: . ? Was noch?  
-
-
 \section{Conclusion}
 % TODO: Kurze Zusammenfassung hier?
+For further study the following four aspects would be interesting. 
 
-For further study the following three things would be interesting. 
+First, one important note that was already mentioned is that the traditional RL-methods were trained on approximately 1.000 times the magnitude of episodes compared to the Deep Q-Learning.
+The training for the Deep Q-Learning was stopped at 180.000 episodes, which took 3 hours and 7 minutes, due to the deadline of this submission.
+Interestignly between 120.000 and 180.000 training episodes, the estimated policy improved noticably and it would therefore be interesting to see the estimations of the DQN trained further. 
 
-First, in the methods section it was already mentioned that the desired advanced counting method could not be examined due to hardware limitations. 
+Secondly, in the methods section it was already mentioned that the desired advanced counting method could not be examined due to hardware limitations. 
 Although the result with the limited counting method was still insightful, the test should be examined again with better hardware.
 With the desired counting method where the amount of every card value is counted, it would be interesting to test whether expected reward exceeds the one with Edward Thorb's counting methods \cite{b1}.
 
-Secondly, the performance of the DQN could be tested when removing its two implementation details: Experience Replay Buffer and Target Neural Network \cite{b2}.
+Thirdly, the performance of the DQN could be tested when removing its two implementation details: Experience Replay Buffer and Target Neural Network \cite{b2}.
 The \textit{Playing Atari with Deep Reinforcement Learning} paper \cite{b2} suggest less robust training but it is unclear how the training would go when removing one of the components or both. 
 
 Lastly, it could be tested if the trained DQN could be used to play other similar card games on a high level without retraining the model. 
 This idea is motivated by the \textit{Playing Atari with Deep Reinforcement Learning} paper where the trained model was able to achieve super-human level of play in different Atari games without the need for retraining \cite{b2}. 
 
-
-% TODO: Es wäre interessant: 
-% [X] advanced counting state space war zu groß, RAM voll. Wäre interessant was rauskommen würde, wenn man diese Limitation nicht hätte.
-% [X] . Mit Geld spielen. Ob es DQN schafft einen höheren Expected Reward zu erreichen als traditionelle Methoden 
-% [X] . Verhalten von DQN ohne Verbesserungen (Replay Buffer und Target network)
-% [ ] . Ob sich das trainierte DQN einfach auf andere (ähnliche) Kartenspiele, wo es ums Punkte sammeln geht, anwenden lässt - Ohne eine Veränderung machen zu müssen.
-	% . Das haben sie früher bei Atari auch ausprobiert und es ist sehr interessant gewesen.
-
-
-
-%\begin{table}[htbp]
-%\caption{Table Type Styles}
-%\begin{center}
-%\begin{tabular}{|c|c|c|c|}
-%\hline
-%\textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
-%\cline{2-4} 
-%\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
-%\hline
-%copy& More table copy$^{\mathrm{a}}$& &  \\
-%\hline
-%\multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
-%\end{tabular}
-%\label{tab1}
-%\end{center}
-%\end{table}
-
-%\begin{figure}[htbp]
-%\centerline{\includegraphics{fig1.png}}
-%\caption{Example of a figure caption.}
-%\label{fig}
-%\end{figure}
 
 \begin{thebibliography}{00}
 \bibitem{b1} Thorp, E. O. (1966). Beat the dealer: A winning strategy for the game of twenty-one (Vol. 310). Vintage.
