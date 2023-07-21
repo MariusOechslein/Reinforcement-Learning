@@ -36,7 +36,7 @@
 \end{abstract}
 
 \begin{IEEEkeywords}
-	Blackjack, Reinforcement Learning, Monte Carlo
+	Blackjack, Monte Carlo Control, SARSA, Q-Learning, Deep Q-Learning
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -220,7 +220,7 @@ The advantage of using the target neural network is more stable training and tha
 
 
 
-\section{Results}
+\section{Experiments and Evaluation}
 In the following section the plots are randomly chosen from training with the different RL-methods: Monte Carlo Control, SARSA and Q-Learning. 
 The results for the different RL-methods are almost identical with the only noticable difference being the training time.  
 The results of the different methods are used interchangably in this section to highlight the simmilarities between these RL-methods and that all of these RL-methods are suitable for the task of modeling Blackjack. 
@@ -229,10 +229,7 @@ Additionally only the results of one RL-method for one test is shown to make thi
 All of the other plots can be viewed in the provided zip-file.
 
 \subsection{Basic Strategy}
-% TODO: use the following line when showing the DQN plot for basic strategy 
-%\subsubsection{Monte Carlo Control, SARSA and Q-Learning}
-
-All of the methods came close to the baseline basic strategy of Edward Thorb \cite{b1}.
+The RL-methods and the Deep Q-Learning method all came close to the baseline basic strategy of Edward Thorb \cite{b1}.
 Figure \ref{fig:monte-carlo-basic-strategy} for example is very close to Edward Thorb's basic strategy for hitting and standing \cite{b1}. 
 Although it is important to note that SARSA and Deep Q-Learning  methods needed substantially more training time to achieve this goal than Monte Carlo Control and Q-Learning. 
 An exact training time comparison was not conducted since the main focus of this paper is whether the methods are able to estimate the Q-Table well as the state-space increases and not in which timeframe they are able to do so.
@@ -257,20 +254,30 @@ Note that in Figure \ref{fig:sarsa-state-value-basic} the dealer's ace is shown 
 	\label{fig:sarsa-state-value-basic}
 \end{figure}
 
+\subsection{Complete Point Count Sytem}
+For the Complete Point Count System the point of interest was whether the player's policy adapts when the counting score becomes higher and lower. 
+A higher counting score means that there are more high cards left in the deck than low cards.
+This increases the chances of the player since there is a higher chance of busting for the dealer \cite{b1}.  
 
-% TODO: Deep Q-Learning Basic Strategy
-% TODO:\subsubsection{Deep Q-Learning}
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/DQN/counting-180000/policy-counting-7.png}
+	\caption{DQN policy after 180 thousand episodes with a card counting score of 7. From own calculations.}
+	\label{fig:dqn-card-counting-7}
+\end{figure}
 
+Figure \ref{fig:dqn-card-counting-7} shows that the player should hit in fewer cases than the basic strategy from the last section suggests.
+This follows the Edward Thorb's statement that there is a higher chance for busting which increases the player's winning chances by hitting less \cite{b1}.
 
-%\subsection{Complete Point Count Sytem}
-% TODO: Do I want to include this or not?
-% TODO: Maybe include it later, after I finished the advanced system.
+Note that the policy in Figure \ref{fig:dqn-card-counting-5} does not change much compared to the basic strategy when the player has a usable ace. 
+This makes sense since the ace can be counted as 1 if the player's hand goes over 21 after hitting a card.
+Hitting a card in that case therefore only improves the player's chances of winning which is why he should hit in that game state. 
 
 
 \subsection{Increased state space - counting all cards}
+For these experiments the card counting method was more complex, increasing the state-space to \textbf{1.027.000 states}. 
 \subsubsection{Monte Carlo Control, SARSA and Q-Learning}
 % TODO: Counting all cards (sollte die state-space erheblich erhöhen). Wie verhalten sich die 3 traditionellen im Vergleich zu DQN?
-For these experiments the card counting method was more complex, increasing the state-space to \textbf{1.027.000 states}. 
 
 \begin{figure}
 	\centering
@@ -308,14 +315,57 @@ The results for the RL-methods look very similar and indicate the same conclusio
 
 \subsubsection{Deep Q-Learning}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/DQN/rewards_over_time_10000.png}
+	\caption{Deep Q-Learning with advanced counting method. Rewards over the first 10.000 episodes. From own calculations.}
+	\label{fig:dqn-rewards-over-time}
+\end{figure}
 
-% TODO: Plots: Vllt. Value functions? -> Es ist schwierig das darzustellen.
+Figure \ref{fig:dqn-rewards-over-time} indicates the DQN's learning within the first 10.000 episodes. 
+This fast learning at the start is remarkable due to the complex state-space and the complex neural network architecture. 
+Although it is important to note that the curve doesn't increase more over time but rather stays at around -0.1. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/DQN/advanced/policy-1010101010.png}
+	\caption{Deep Q-Learning with advanced counting method. Every other card has been played, starting from Ace. From own calculations.}
+	\label{fig:dqn-advanced-every-other}
+\end{figure}
+
+Figure \ref{fig:dqn-advanced-every-other} shows that the Deep Q-learning is able to approximate the policy well even for very uncommon states. 
+Note that the same state was shown in Figure \ref{fig:q-learning-advanced-every-other} for Q-Learning. 
+The Deep Q-Learning estimates the policy for this uncommon state substantially better than the RL-methods. 
+
+It is also important to note here that is is unclear what the policy should exactly look like because this state has not been covered in \cite{b1} or \cite{b4}.
+In this state an ace has been played while a card with value 10 has not been played. 
+Since it is unclear what the exact impact of these two card values is, a prediction for a perfect policy can not be made without further investigation. 
+Although the policy seems reasonable since it comes close to the basic strategy \cite{b1} which should be a policy not far away.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/DQN/advanced/policy-low-cards-played.png}
+	\caption{Deep Q-Learning with advanced counting method. Only low cards (2,3,4,5,6) have been played. From own calculations.}
+	\label{fig:dqn-advanced-only-low}
+\end{figure}
+
+Figure \ref{fig:dqn-advanced-only-low} shows the policy for the state where only low cards have been played. 
+This comes close to a high counting score for the Complete Point Count System in Figure \ref{fig:dqn-card-counting-7}.
+Although it is important to note that those two states are not equivalent since the advanced counting method does not keep track of how many cards of a single value have been played.
+
 % TODO: Plots: Vllt. T-SNE plot?
 
-\section{Discussion}
+
+
+
+% TODO: Write these things into last section!
+%\section{Discussion}
 % TODO: Basic strategy: It's not sure how Edward Thorb did the calulations, with which rules. That's why it's only important that the policy is exactly the same. 
 
-% TODO: ? Haben die Methoden so gut abgeschlossen, wie erwartet? 
+% TODO: Es ist hervorzuheben, dass alle RLmethoden sehr ähnlich gut abgeschnitten haben. Der einzige Unterschied war die training time. In diesem paper wurde aber nur auf results fokussiert. 
+
+% TODO: DQN goes in the right direction, training time is very long, but it needs high training time to be able to estimate the policy better. 
+
 % TODO: . Wie haben sich die Methoden im Vergleich verhalten? Wie lässt sich das erklären?
 % TODO: . Was bedeuten diese Ergebnisse? -> Dass DQN für high state-space eingesetzt werden sollte. Dass die anderen Methoden aber auch gut sind, wenn der state-space nicht soo hoch ist. 
 % TODO: . ? Was noch?  
