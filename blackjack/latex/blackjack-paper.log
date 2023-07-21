@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  21 JUL 2023 22:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  21 JUL 2023 22:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -379,11 +379,6 @@ File: figures/DQN/counting-180000/policy-counting-7.png Graphic file (type png)
 Package pdftex.def Info: figures/DQN/counting-180000/policy-counting-7.png  use
 d on input line 207.
 (pdftex.def)             Requested size: 199.16928pt x 79.01276pt.
-
-
-LaTeX Warning: Reference `fig:dqn-card-counting-5' on page 4 undefined on input
- line 214.
-
 <figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-111111
 1111.png, id=28, 974.64125pt x 433.62pt>
 File: figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-1
@@ -423,11 +418,11 @@ File: figures/DQN/advanced/policy-1010101010.png Graphic file (type png)
 Package pdftex.def Info: figures/DQN/advanced/policy-1010101010.png  used on in
 put line 267.
 (pdftex.def)             Requested size: 199.16928pt x 80.47813pt.
-[4 <./figures/DQN/counting-180000/policy-counting-7.png> <./figures/Q-Learning/
-advanced-counting-10-million/policy-all-cards-played-1111111111.png> <./figures
-/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png> <./figures/
-Q-Learning/advanced-counting-10-million/policy-some-cards-played-1010101010.png
->]
+ [4 <./figures/DQN/counting-180000/policy-counting-7.png> <./figures/Q-Learning
+/advanced-counting-10-million/policy-all-cards-played-1111111111.png> <./figure
+s/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png> <./figures
+/Q-Learning/advanced-counting-10-million/policy-some-cards-played-1010101010.pn
+g>]
 <figures/DQN/advanced/policy-low-cards-played.png, id=40, 982.67125pt x 395.477
 5pt>
 File: figures/DQN/advanced/policy-low-cards-played.png Graphic file (type png)
@@ -449,31 +444,27 @@ Before submitting the final camera ready copy, remember to:
 
 [5 <./figures/DQN/rewards_over_time_10000.png> <./figures/DQN/advanced/policy-1
 010101010.png> <./figures/DQN/advanced/policy-low-cards-played.png>]
-(./blackjack-paper.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+(./blackjack-paper.aux) ) 
 Here is how much of TeX's memory you used:
- 4193 strings out of 478268
- 68478 string characters out of 5846346
+ 4192 strings out of 478268
+ 68453 string characters out of 5846346
  373963 words of memory out of 5000000
- 22365 multiletter control sequences out of 15000+600000
+ 22364 multiletter control sequences out of 15000+600000
  501432 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,8n,62p,692b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
-xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
-ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
-e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
-022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
-22/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022
-/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dis
-t/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
-ype1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/t
-imes/utmri8a.pfb>
-Output written on blackjack-paper.pdf (5 pages, 1222730 bytes).
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/ba
+se/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
+.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
+b></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
+/usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local
+/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/
+2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf
+-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on blackjack-paper.pdf (5 pages, 1222243 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream

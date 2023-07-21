@@ -211,11 +211,11 @@ For the Complete Point Count System, the main focus was to observe whether the p
 
 In this state, Figure \ref{fig:dqn-card-counting-7} suggests that the player should hit less frequently compared to the basic strategy shown in Figure \ref{fig:monte-carlo-basic-strategy}. This aligns with Edward Thorp's statement that a high ratio of high cards increases the player's winning probabilities by hitting less \cite{b1}.
 
-For the case where the player has a usable ace, the policy in Figure \ref{fig:dqn-card-counting-5} remains mostly unchanged. This is reasonable since the ace's value can be reduced to 1 if the player's hand exceeds 21 after hitting a card. Consequently, hitting a card in this scenario only improves the player's winning chances, explaining why they should hit in that case.
+For the case where the player has a usable ace, the policy in Figure \ref{fig:dqn-card-counting-7} remains mostly unchanged. This is reasonable since the ace's value can be reduced to 1 if the player's hand exceeds 21 after hitting a card. Consequently, hitting a card in this scenario only improves the player's winning chances, explaining why they should hit in that case.
 
 
 \subsection{Increased state space - counting all cards}
-For the following experiments the more advanced card counting method was employed, increasing the state-space to \textbf{1.027.000 states}. 
+For the following experiments the more advanced card counting method was employed, increasing the state-space to 1.027.000 states. 
 
 \subsubsection{Monte Carlo Control, SARSA and Q-Learning}
 
