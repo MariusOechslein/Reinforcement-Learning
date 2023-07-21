@@ -118,10 +118,12 @@ The counting score in one episode can at most be +24 (= 6 cards * 4 suits) and a
 This would increase the state-space to \textbf{11.000 states} (= 250 states * (24 - 20)) for the Complete Point Count System. 
 Although it is important to note that a counting score around 0 is far more likely than of +24 or -20.
 
-When making the card counting method more complex by counting every value of the seen cards, the state space increases to approximately \textbf{907.000.000 states} (= 250 states * ((52 cards / 4 suits) - 3 face cards)!) for playing through one card deck.  
-Altough the actual state-space is a little less considering that the player can only see one card of the dealer's cards.
-The most important thing to note here is that the state-space explodes when using this more complex card counting method. 
-% TODO: Is this a correct calculation?
+When making the card counting method more complex by keeping track of every value of played cards, the state space increases to approximately \textbf{1.048.576.000 states} (= 250 states * (($4^9$ number cards * (4 face cards * 4 states))) for playing through one card deck. 
+Unfortunately with such a big state space the calculations ran into RAM problems with the Google Colab Free version (12.7 GB RAM).
+Therefore a simpler card counting method was chosen by not keeping track of the exact amount of each of the card-values but only if a card-value has been played or not. 
+This can still be informative for predicting the player's chances since it directly tells when all four cards are left in the deck of some card-value.
+
+When using this advanced card counting method the state space is \textbf{1.024.000 states} (= 250 states * (($2^9$ * (4 face cards * 2 states))) when playing through one card deck.
 
 With this huge state space it is interesting to observe how Deep Reinforcement Learning performs and how other Reinforcement Learning methods perform compared to that. 
 
@@ -219,16 +221,100 @@ The advantage of using the target neural network is more stable training and tha
 
 
 \section{Results}
+In the following section the plots are randomly chosen from training with the different RL-methods: Monte Carlo Control, SARSA and Q-Learning. 
+The results for the different RL-methods are almost identical with the only noticable difference being the training time.  
+The results of the different methods are used interchangably in this section to highlight the simmilarities between these RL-methods and that all of these RL-methods are suitable for the task of modeling Blackjack. 
+Additionally only the results of one RL-method for one test is shown to make this paper as consise as possible. 
+% TODO: SOllte ich das hier schreiben? Oder mein Github verlinken? Oder Anhang?
+All of the other plots can be viewed in the provided zip-file.
 
 \subsection{Basic Strategy}
-% TODO: Basic Strategy von allen 4 Methoden erreicht. Wie möchte ich das zeigen? -> Policy?
+% TODO: use the following line when showing the DQN plot for basic strategy 
+%\subsubsection{Monte Carlo Control, SARSA and Q-Learning}
+
+All of the methods came close to the baseline basic strategy of Edward Thorb \cite{b1}.
+Figure \ref{fig:monte-carlo-basic-strategy} for example is very close to Edward Thorb's basic strategy for hitting and standing \cite{b1}. 
+Although it is important to note that SARSA and Deep Q-Learning  methods needed substantially more training time to achieve this goal than Monte Carlo Control and Q-Learning. 
+An exact training time comparison was not conducted since the main focus of this paper is whether the methods are able to estimate the Q-Table well as the state-space increases and not in which timeframe they are able to do so.
+
+% Show Q-Learning Policy as example
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/MC/basic-100-million/policy.png}
+	\caption{Monte Carlo Control policy after 100 million episodes. From own calculations.}
+	\label{fig:monte-carlo-basic-strategy}
+\end{figure}
+
+The state-value function \ref{fig:sarsa-state-value-basic} also looks very close to the state-value function of the basic strategy \cite{b4}.
+This indicates that the RL-methods are able to estimate the basic strategy well. 
+
+Note that in Figure \ref{fig:sarsa-state-value-basic} the dealer's ace is shown on the right of its states while in \cite{b4} the ace is shown on the the other side. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/MC/basic-100-million/value-function-no-usuable-ace.png}
+	\caption{SARSA state-value function after 100 million episodes for case: no-usable ace. From own calculations.}
+	\label{fig:sarsa-state-value-basic}
+\end{figure}
+
+
+% TODO: Deep Q-Learning Basic Strategy
+% TODO:\subsubsection{Deep Q-Learning}
+
+
+%\subsection{Complete Point Count Sytem}
+% TODO: Do I want to include this or not?
+% TODO: Maybe include it later, after I finished the advanced system.
+
 
 \subsection{Increased state space - counting all cards}
+\subsubsection{Monte Carlo Control, SARSA and Q-Learning}
 % TODO: Counting all cards (sollte die state-space erheblich erhöhen). Wie verhalten sich die 3 traditionellen im Vergleich zu DQN?
+For these experiments the card counting method was more complex, increasing the state-space to \textbf{1.027.000 states}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-1111111111.png}
+	\caption{Q-Learning with advanced counting method. All cards have been played. From own calculations.}
+	\label{fig:q-learning-advanced-all-cards-played}
+\end{figure}
+
+In Figure \ref{fig:q-learning-advanced-all-cards-played} the policy is shown for the case where all cards have been played at least once.
+It is important to note here that this is the most common state and the policy should therefore come close the policy for the basic strategy \cite{b1}.
+% TODO: Ist das hier richtig, oder sollte das in die Discussion?
+Although the policy with this advanced counting method differs a little bit from the basic strategy which is probably due to an insufficient amount of games played in this state.
+Even though this state is the most common, it is still uncertain to reach this state when playing through one deck.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png}
+	\caption{Q-Learning with advanced counting method. Only 5 and 8 have not been played. From own calculations.}
+	\label{fig:q-learning-advanced-5-8-not-played}
+\end{figure}
+
+In Figure \ref{fig:q-learning-advanced-5-8-not-played} the policy seems more noisy which is because the state where all cards have been played is more common to encounter than the state where only the card-values 5 and 8 have not been played yet. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=70mm]{figures/Q-Learning/advanced-counting-10-million/policy-some-cards-played-1010101010.png}
+	\caption{Q-Learning with advanced counting method. Every other card has been played, starting from Ace. From own calculations.}
+	\label{fig:q-learning-advanced-every-other}
+\end{figure}
+
+And Figure \ref{fig:q-learning-advanced-every-other} shows the case of an even more uncommon state where the policy is very noisy.  
+
+% TODO: Anhang? Github?
+The results for the RL-methods look very similar and indicate the same conclusion that the RL-methods are unable to model the Q-table as the state-space increases drastically without increasing the training episodes by the same magnitude. 
+
+\subsubsection{Deep Q-Learning}
+
+
 % TODO: Plots: Vllt. Value functions? -> Es ist schwierig das darzustellen.
 % TODO: Plots: Vllt. T-SNE plot?
 
 \section{Discussion}
+% TODO: Basic strategy: It's not sure how Edward Thorb did the calulations, with which rules. That's why it's only important that the policy is exactly the same. 
+
 % TODO: ? Haben die Methoden so gut abgeschlossen, wie erwartet? 
 % TODO: . Wie haben sich die Methoden im Vergleich verhalten? Wie lässt sich das erklären?
 % TODO: . Was bedeuten diese Ergebnisse? -> Dass DQN für high state-space eingesetzt werden sollte. Dass die anderen Methoden aber auch gut sind, wenn der state-space nicht soo hoch ist. 
@@ -236,10 +322,26 @@ The advantage of using the target neural network is more stable training and tha
 
 
 \section{Conclusion}
+% TODO: Kurze Zusammenfassung hier?
+
+For further study the following three things would be interesting. 
+
+First, in the methods section it was already mentioned that the desired advanced counting method could not be examined due to hardware limitations. 
+Although the result with the limited counting method was still insightful, the test should be examined again with better hardware.
+With the desired counting method where the amount of every card value is counted, it would be interesting to test whether expected reward exceeds the one with Edward Thorb's counting methods \cite{b1}.
+
+Secondly, the performance of the DQN could be tested when removing its two implementation details: Experience Replay Buffer and Target Neural Network \cite{b2}.
+The \textit{Playing Atari with Deep Reinforcement Learning} paper \cite{b2} suggest less robust training but it is unclear how the training would go when removing one of the components or both. 
+
+Lastly, it could be tested if the trained DQN could be used to play other similar card games on a high level without retraining the model. 
+This idea is motivated by the \textit{Playing Atari with Deep Reinforcement Learning} paper where the trained model was able to achieve super-human level of play in different Atari games without the need for retraining \cite{b2}. 
+
+
 % TODO: Es wäre interessant: 
-% . Mit Geld spielen. Ob es DQN schafft einen höheren Expected Reward zu erreichen als traditionelle Methoden 
-% . Verhalten von DQN ohne Verbesserungen (Replay Buffer und Target network)
-% . Ob sich das trainierte DQN einfach auf andere (ähnliche) Kartenspiele, wo es ums Punkte sammeln geht, anwenden lässt - Ohne eine Veränderung machen zu müssen.
+% [X] advanced counting state space war zu groß, RAM voll. Wäre interessant was rauskommen würde, wenn man diese Limitation nicht hätte.
+% [X] . Mit Geld spielen. Ob es DQN schafft einen höheren Expected Reward zu erreichen als traditionelle Methoden 
+% [X] . Verhalten von DQN ohne Verbesserungen (Replay Buffer und Target network)
+% [ ] . Ob sich das trainierte DQN einfach auf andere (ähnliche) Kartenspiele, wo es ums Punkte sammeln geht, anwenden lässt - Ohne eine Veränderung machen zu müssen.
 	% . Das haben sie früher bei Atari auch ausprobiert und es ist sehr interessant gewesen.
 
 

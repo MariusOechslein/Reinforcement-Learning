@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  20 JUL 2023 23:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.16)  21 JUL 2023 15:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -319,18 +319,18 @@ Overfull \hbox (3.79692pt too wide) in paragraph at lines 111--112
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--167
+Underfull \hbox (badness 10000) in paragraph at lines 166--169
  \OT1/ptm/m/it/10 2) SARSA: [][] \OT1/ptm/m/n/10 The State-Action-Reward-State-
 Action
  []
 
 
-Underfull \hbox (badness 7486) in paragraph at lines 164--167
+Underfull \hbox (badness 7486) in paragraph at lines 166--169
 \OT1/ptm/m/n/10 (SARSA) method was also in-tro-duced in the book
  []
 
 
-Overfull \hbox (9.3058pt too wide) detected at line 169
+Overfull \hbox (9.3058pt too wide) detected at line 171
 \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 ) \
 OMS/cmsy/m/n/10   \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\
 OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 R[] \OT1
@@ -340,7 +340,7 @@ m/m/it/10 S[]; A[]\OT1/cmr/m/n/10 )]
  []
 
 
-Overfull \hbox (15.39021pt too wide) detected at line 177
+Overfull \hbox (15.39021pt too wide) detected at line 179
 \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 ) \
 OMS/cmsy/m/n/10   \OML/cmm/m/it/10 Q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; A[]\
 OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 R[] \OT1
@@ -350,6 +350,50 @@ cmm/m/it/10 S[]; A[]\OT1/cmr/m/n/10 )]
  []
 
 [2]
+<figures/MC/basic-100-million/policy.png, id=19, 980.66376pt x 400.49625pt>
+File: figures/MC/basic-100-million/policy.png Graphic file (type png)
+<use figures/MC/basic-100-million/policy.png>
+Package pdftex.def Info: figures/MC/basic-100-million/policy.png  used on input
+ line 243.
+(pdftex.def)             Requested size: 199.16928pt x 81.33838pt.
+<figures/MC/basic-100-million/value-function-no-usuable-ace.png, id=21, 540.017
+5pt x 551.05875pt>
+File: figures/MC/basic-100-million/value-function-no-usuable-ace.png Graphic fi
+le (type png)
+<use figures/MC/basic-100-million/value-function-no-usuable-ace.png>
+Package pdftex.def Info: figures/MC/basic-100-million/value-function-no-usuable
+-ace.png  used on input line 255.
+(pdftex.def)             Requested size: 199.16928pt x 203.24109pt.
+<figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-111111
+1111.png, id=22, 974.64125pt x 433.62pt>
+File: figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-1
+111111111.png Graphic file (type png)
+<use figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-11
+11111111.png>
+Package pdftex.def Info: figures/Q-Learning/advanced-counting-10-million/policy
+-all-cards-played-1111111111.png  used on input line 277.
+(pdftex.def)             Requested size: 199.16928pt x 88.60815pt.
+ [3 <./figures/MC/basic-100-million/policy.png> <./figures/MC/basic-100-million
+/value-function-no-usuable-ace.png>]
+<figures/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png, id=
+28, 973.6375pt x 434.62375pt>
+File: figures/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png
+ Graphic file (type png)
+<use figures/Q-Learning/advanced-counting-10-million/policy-5-8-not-played.png>
+
+Package pdftex.def Info: figures/Q-Learning/advanced-counting-10-million/policy
+-5-8-not-played.png  used on input line 290.
+(pdftex.def)             Requested size: 199.16928pt x 88.90611pt.
+<figures/Q-Learning/advanced-counting-10-million/policy-some-cards-played-10101
+01010.png, id=29, 970.62625pt x 430.60875pt>
+File: figures/Q-Learning/advanced-counting-10-million/policy-some-cards-played-
+1010101010.png Graphic file (type png)
+<use figures/Q-Learning/advanced-counting-10-million/policy-some-cards-played-1
+010101010.png>
+Package pdftex.def Info: figures/Q-Learning/advanced-counting-10-million/policy
+-some-cards-played-1010101010.png  used on input line 299.
+(pdftex.def)             Requested size: 199.16928pt x 88.36078pt.
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -361,30 +405,33 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3] (./blackjack-paper.aux) ) 
+[4 <./figures/Q-Learning/advanced-counting-10-million/policy-all-cards-played-1
+111111111.png> <./figures/Q-Learning/advanced-counting-10-million/policy-5-8-no
+t-played.png> <./figures/Q-Learning/advanced-counting-10-million/policy-some-ca
+rds-played-1010101010.png>] (./blackjack-paper.aux) ) 
 Here is how much of TeX's memory you used:
- 4114 strings out of 478268
- 64352 string characters out of 5846346
- 373891 words of memory out of 5000000
- 22301 multiletter control sequences out of 15000+600000
+ 4157 strings out of 478268
+ 66995 string characters out of 5846346
+ 373931 words of memory out of 5000000
+ 22336 multiletter control sequences out of 15000+600000
  501432 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,62p,304b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvip
-s/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/l
-ocal/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texl
-ive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/t
-exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on blackjack-paper.pdf (3 pages, 125933 bytes).
+ 55i,8n,62p,323b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/local/texlive/2022/t
+exmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/
+times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb
+i8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></
+usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on blackjack-paper.pdf (4 pages, 888857 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
+ 79 PDF objects out of 1000 (max. 8388607)
+ 42 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
